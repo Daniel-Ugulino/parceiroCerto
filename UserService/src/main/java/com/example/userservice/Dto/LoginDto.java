@@ -1,0 +1,17 @@
+package com.example.userservice.Dto;
+
+import jakarta.validation.constraints.NotBlank;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
+public class LoginDto {
+    @NotBlank
+    private String password;
+
+    @NotBlank
+    private String email;
+}
