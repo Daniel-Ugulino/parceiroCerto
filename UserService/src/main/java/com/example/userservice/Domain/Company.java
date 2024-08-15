@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -17,12 +18,12 @@ import java.util.List;
 public class Company extends Users {
     private String socialName;
     private String professionalField;
-    private Long cnpj;
     private String description;
+    private Long cnpj;
 
     @ElementCollection
     @CollectionTable(name = "company_expertise", joinColumns = @JoinColumn(name = "company_id"))
-    private List<String> expertise;
+    private List<String> expertise = new ArrayList<>();
 
     public List<String> addExpertise(String expertise) {
         this.expertise.add(expertise);

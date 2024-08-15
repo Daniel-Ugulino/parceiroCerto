@@ -20,14 +20,19 @@ public class Users {
     private String password;
     private String email;
     private String phone;
+    @Enumerated(EnumType.STRING)
     private Roles role;
     private String gender;
     private Date birthday;
     private Date createdAt;
-    private boolean enabled = true;
+    private Boolean enabled = true;
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "id_location")
+    private Location location;
 
     @PrePersist
     protected void onCreate() {
         this.createdAt = new Date();
     }
+
 }

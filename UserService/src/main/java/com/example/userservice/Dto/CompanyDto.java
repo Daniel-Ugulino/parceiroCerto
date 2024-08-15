@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -18,6 +20,6 @@ public class CompanyDto{
     @NotBlank
     private String descricao;
 
-    @NotBlank
-    private String especialidades;
+    @NotNull
+    private List<String> expreiencias;
 }

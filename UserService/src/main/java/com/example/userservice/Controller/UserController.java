@@ -78,7 +78,6 @@ public class UserController {
         }
     }
 
-
     @PatchMapping("/{id}/activate")
     public ResponseEntity<Object> activate(@PathVariable Long id) {
         try {

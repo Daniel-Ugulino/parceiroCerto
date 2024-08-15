@@ -1,23 +1,32 @@
 package com.example.userservice.Dto;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @Getter
 @Setter
+@AllArgsConstructor
 @NoArgsConstructor
-public class FreelancerDto {
-    @NotBlank
-    private String descricao;
+@Valid
+public class LocationDto {
 
     @NotBlank
-    private String especialidades;
+    private String street;
+
+    @NotBlank
+    private String city;
+
+    @NotBlank
+    private String state;
 
     @NotNull
-    private List<String> expreiencias;
+    private Long zipCode;
+
+    @NotBlank
+    private String country;
 }

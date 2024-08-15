@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -19,7 +20,7 @@ public class Freelancer extends Users {
 
     @ElementCollection
     @CollectionTable(name = "freelancer_especialidades", joinColumns = @JoinColumn(name = "freelancer_id"))
-    private List<String> expertise;
+    private List<String> expertise = new ArrayList<>();
 
     public List<String> addExpertise(String expertise) {
         this.expertise.add(expertise);
