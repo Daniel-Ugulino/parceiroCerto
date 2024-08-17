@@ -11,7 +11,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-public class FreelancerDto {
+public class FreelancerDto extends UserDto {
     @NotBlank
     private String descricao;
 

@@ -35,4 +35,12 @@ public class Users {
         this.createdAt = new Date();
     }
 
+    public void reset(Users users){
+        this.setId(users.getId());
+        this.setPassword(users.getPassword());
+        this.setRole(users.getRole());
+        this.setEnabled(users.getEnabled());
+        this.setCreatedAt(users.getCreatedAt());
+    }
+
 }

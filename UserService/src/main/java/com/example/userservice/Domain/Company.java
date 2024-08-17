@@ -7,7 +7,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -19,21 +21,26 @@ public class Company extends Users {
     private String socialName;
     private String professionalField;
     private String description;
-    private Long cnpj;
+    private String cnpj;
 
     @ElementCollection
     @CollectionTable(name = "company_expertise", joinColumns = @JoinColumn(name = "company_id"))
     private List<String> expertise = new ArrayList<>();
 
-    public List<String> addExpertise(String expertise) {
-        this.expertise.add(expertise);
-        return this.expertise;
+    public void addExpertise(List<String> expertises) {
+        Set<String> currentExpertises = new HashSet<>(expertises);
+        List<String> updatedExpertises = new ArrayList<>(currentExpertises);
+        for (String expertise : expertises) {
+            if (currentExpertises.add(expertise)) {
+                updatedExpertises.add(expertise);
+            }
+        }
+        this.setExpertise(updatedExpertises);
     }
 
-    public List<String> removeExpertise(Integer index) {
+    public void removeExpertise(Integer index) {
         if (index >= 0 && index < this.expertise.size()) {
             this.expertise.remove((int) index);
         }
-        return this.expertise;
     }
 }

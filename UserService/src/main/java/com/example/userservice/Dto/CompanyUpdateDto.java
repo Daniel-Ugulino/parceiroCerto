@@ -1,16 +1,11 @@
 package com.example.userservice.Dto;
 
-import jakarta.validation.constraints.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.List;
 
-@Getter
-@Setter
-@NoArgsConstructor
-public class CompanyDto extends UserDto{
+public class CompanyUpdateDto extends UserUpdateDto{
     @NotBlank
     private String socialName;
 
