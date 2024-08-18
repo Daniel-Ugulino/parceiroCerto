@@ -13,11 +13,8 @@ import java.util.List;
 @NoArgsConstructor
 public class FreelancerDto extends UserDto {
     @NotBlank
-    private String descricao;
-
-    @NotBlank
-    private String especialidades;
+    private String description;
 
     @NotNull
-    private List<String> expreiencias;
+    private List<String> expertise;
 }

@@ -16,7 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("hirer")
-public class HireController {
+public class HirerController {
     @Autowired
     HirerService hirerService;
 
@@ -24,7 +24,7 @@ public class HireController {
     public ResponseEntity<Object> add(@RequestBody @Valid HirerDto hirerDto) {
         try {
             Hirer hirerEntity = hirerService.save(hirerDto);
-            return ResponseEntity.status(HttpStatus.OK).body(new CustomResponse<>("Password reset successfully",hirerEntity));
+            return ResponseEntity.status(HttpStatus.OK).body(new CustomResponse<>("Hirer Saved Successfully",hirerEntity));
         } catch (DataIntegrityViolationException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new CustomResponse<>("Data integrity violation"));
         } catch (Exception e) {
@@ -37,7 +37,7 @@ public class HireController {
     public ResponseEntity<Object> getAll() {
         try {
             List<Hirer> companies = hirerService.listAll();
-            return ResponseEntity.status(HttpStatus.OK).body(new CustomResponse<>("Password reset successfully",companies));
+            return ResponseEntity.status(HttpStatus.OK).body(new CustomResponse<>("Hirers Found",companies));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User Not Found");
         }
@@ -47,7 +47,7 @@ public class HireController {
     public ResponseEntity<Object> get(@PathVariable Long id) {
         try {
             Hirer hirer = hirerService.getById(id);
-            return ResponseEntity.status(HttpStatus.OK).body(new CustomResponse<>("hirer Found",hirer));
+            return ResponseEntity.status(HttpStatus.OK).body(new CustomResponse<>("Hirer Found",hirer));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Hirer Not Found");
         }

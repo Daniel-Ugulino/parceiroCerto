@@ -68,11 +68,11 @@ public class CompanyService {
         }
     }
 
-    public Company removeExpertise(Integer expertiseIndex,Long id) throws Exception{
+    public Company removeExpertise(List<String> expertises,Long id) throws Exception{
         Optional<Company> optionalCompany = companyRepository.findById(id);
         if(optionalCompany.isPresent()){
             Company storedCompany = optionalCompany.get();
-            storedCompany.removeExpertise(expertiseIndex);
+            storedCompany.removeExpertise(expertises);
             companyRepository.save(storedCompany);
             return storedCompany;
         }else{

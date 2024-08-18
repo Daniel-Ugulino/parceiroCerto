@@ -68,14 +68,14 @@ public class FreelancerService {
         }
     }
 
-    public Freelancer removeExpertise(Integer expertisesIndex,Long id) throws Exception {
+    public Freelancer removeExpertise(List<String> expertises,Long id) throws Exception {
         Optional<Freelancer> optionalFreelancer = freelancerRepository.findById(id);
-        if(optionalFreelancer.isPresent()){
+        if (optionalFreelancer.isPresent()) {
             Freelancer storedFreelancer = optionalFreelancer.get();
-            storedFreelancer.removeExpertise(expertisesIndex);
+            storedFreelancer.removeExpertise(expertises);
             freelancerRepository.save(storedFreelancer);
             return storedFreelancer;
-        }else{
+        } else {
             throw new Exception("Freelancer not found");
         }
     }

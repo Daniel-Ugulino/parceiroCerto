@@ -26,12 +26,12 @@ public class FreelancerController {
     public ResponseEntity<Object> add(@RequestBody @Valid FreelancerDto freelancerDto) {
         try {
             Freelancer freelancerEntity = freelancerService.save(freelancerDto);
-            return ResponseEntity.status(HttpStatus.OK).body(new CustomResponse<>("Password reset successfully",freelancerEntity));
+            return ResponseEntity.status(HttpStatus.OK).body(new CustomResponse<>("Freelancer Saved Successfully",freelancerEntity));
         } catch (DataIntegrityViolationException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new CustomResponse<>("Data integrity violation"));
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Internal server error");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new CustomResponse<>("Internal server error"));
         }
     }
 
@@ -39,9 +39,9 @@ public class FreelancerController {
     public ResponseEntity<Object> getAll() {
         try {
             List<Freelancer> companies = freelancerService.listAll();
-            return ResponseEntity.status(HttpStatus.OK).body(new CustomResponse<>("Password reset successfully",companies));
+            return ResponseEntity.status(HttpStatus.OK).body(new CustomResponse<>("Freelancers Found",companies));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User Not Found");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new CustomResponse<>("User Not Found"));
         }
     }
 
@@ -51,7 +51,7 @@ public class FreelancerController {
             Freelancer freelancer = freelancerService.getById(id);
             return ResponseEntity.status(HttpStatus.OK).body(new CustomResponse<>("Freelancer Found",freelancer));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Freelancer Not Found");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new CustomResponse<>("Freelancer Not Found"));
         }
     }
 
@@ -64,11 +64,11 @@ public class FreelancerController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new CustomResponse<>("Data integrity violation"));
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Internal server error");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new CustomResponse<>("Internal server error"));
         }
     }
 
-    @PatchMapping("/{id}")
+    @PatchMapping("/{id}/expertise/add")
     public ResponseEntity<Object> addExpertise(@PathVariable Long id,@RequestBody List<String> expertises) {
         try {
             Freelancer freelancerEntity = freelancerService.addExpertise(expertises,id);
@@ -77,21 +77,20 @@ public class FreelancerController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new CustomResponse<>("Data integrity violation"));
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Internal server error");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new CustomResponse<>("Internal server error"));
         }
     }
 
-    @PatchMapping("/{id}/{index}")
-    public ResponseEntity<Object> removeExpertise(@PathVariable Long id, @PathVariable Integer index) {
+    @PatchMapping("/{id}/expertise/remove")
+    public ResponseEntity<Object> removeExpertise(@PathVariable Long id, @RequestBody List<String> expertises) {
         try {
-            Freelancer freelancerEntity = freelancerService.removeExpertise(index,id);
+            Freelancer freelancerEntity = freelancerService.removeExpertise(expertises,id);
             return ResponseEntity.status(HttpStatus.OK).body(new CustomResponse<>("Expertise Removed",freelancerEntity));
         } catch (DataIntegrityViolationException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new CustomResponse<>("Data integrity violation"));
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Internal server error");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new CustomResponse<>("Internal server error"));
         }
     }
-
 }

@@ -1,6 +1,7 @@
 package com.example.userservice.Dto;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,6 +20,6 @@ public class UserUpdateDto {
     private String phone;
     @NotBlank
     private String gender;
-    @NotBlank
+    @NotNull
     private Date birthday;
 }

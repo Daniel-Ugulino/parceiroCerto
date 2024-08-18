@@ -16,10 +16,11 @@ public class UserController {
     public ResponseEntity<Object> resetPassword(@PathVariable Long id, @RequestBody String password) {
         try {
             userService.resetPassword(password,id);
+            return ResponseEntity.status(HttpStatus.OK).body(new CustomResponse<>("Password Restored successfully"));
+
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User Not Found");
         }
-        return ResponseEntity.status(HttpStatus.OK).body(new CustomResponse<>("Password reset successfully"));
     }
 
     @DeleteMapping("/{id}")

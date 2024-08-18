@@ -2,6 +2,8 @@ package com.example.userservice.Domain;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.envers.AuditTable;
+import org.hibernate.envers.Audited;
 
 import java.util.Date;
 
@@ -10,6 +12,8 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Audited
+@AuditTable(value = "users_audit", schema = "audit")
 @Table(name = "Users")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Users {

@@ -24,6 +24,7 @@ public class HirerService {
     public Hirer save(HirerDto hirerDto){
         Hirer hirerEntity = new Hirer();
         BeanUtils.copyProperties(hirerDto,hirerEntity);
+        System.out.println(hirerDto.getCpf());
         hirerEntity.setRole(Roles.HIRER);
         hirerEntity.setPassword(bCryptPasswordEncoder.encode(hirerEntity.getPassword()));
         hirerRepository.save(hirerEntity);

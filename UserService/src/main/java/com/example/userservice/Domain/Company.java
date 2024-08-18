@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.envers.AuditTable;
+import org.hibernate.envers.Audited;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -16,6 +18,8 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Audited
+@AuditTable(value = "company_audit", schema = "audit")
 @Table(name = "Company")
 public class Company extends Users {
     private String socialName;
@@ -38,9 +42,7 @@ public class Company extends Users {
         this.setExpertise(updatedExpertises);
     }
 
-    public void removeExpertise(Integer index) {
-        if (index >= 0 && index < this.expertise.size()) {
-            this.expertise.remove((int) index);
-        }
+    public void removeExpertise(List<String> expertises) {
+        this.expertise.removeAll(expertises);
     }
 }

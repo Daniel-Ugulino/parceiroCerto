@@ -24,7 +24,7 @@ public class CompanyController {
     public ResponseEntity<Object> add(@RequestBody @Valid CompanyDto companyDto) {
         try {
             Company companyEntity = companyService.save(companyDto);
-            return ResponseEntity.status(HttpStatus.OK).body(new CustomResponse<>("Password reset successfully",companyEntity));
+            return ResponseEntity.status(HttpStatus.OK).body(new CustomResponse<>("Company Saved Successfully",companyEntity));
         } catch (DataIntegrityViolationException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new CustomResponse<>("Data integrity violation"));
         } catch (Exception e) {
@@ -37,7 +37,7 @@ public class CompanyController {
     public ResponseEntity<Object> getAll() {
         try {
             List<Company> companies = companyService.listAll();
-            return ResponseEntity.status(HttpStatus.OK).body(new CustomResponse<>("Password reset successfully",companies));
+            return ResponseEntity.status(HttpStatus.OK).body(new CustomResponse<>("Companies Found",companies));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User Not Found");
         }
@@ -80,9 +80,9 @@ public class CompanyController {
     }
 
     @PatchMapping("/{id}/{index}")
-    public ResponseEntity<Object> removeExpertise(@PathVariable Long id, @PathVariable Integer index) {
+    public ResponseEntity<Object> removeExpertise(@PathVariable Long id,@RequestBody List<String> expertises) {
         try {
-            Company companyEntity = companyService.removeExpertise(index,id);
+            Company companyEntity = companyService.removeExpertise(expertises,id);
             return ResponseEntity.status(HttpStatus.OK).body(new CustomResponse<>("Expertise Removed",companyEntity));
         } catch (DataIntegrityViolationException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new CustomResponse<>("Data integrity violation"));

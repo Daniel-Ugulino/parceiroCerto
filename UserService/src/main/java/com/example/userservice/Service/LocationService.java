@@ -56,7 +56,7 @@ public class LocationService {
         if (usersOptional.isPresent()) {
             Users userEntity = usersOptional.get();
             if(userEntity.getLocation() != null){
-                Location locationEntity = new Location();
+                Location locationEntity = userEntity.getLocation();
                 BeanUtils.copyProperties(locationDto,locationEntity);
                 locationRepository.save(locationEntity);
                 return locationEntity;
