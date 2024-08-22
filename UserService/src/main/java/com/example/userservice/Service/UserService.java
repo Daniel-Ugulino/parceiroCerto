@@ -16,6 +16,15 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
+    public Users getUser(Long id) throws Exception {
+        Optional<Users> optionalStoredUser = userRepository.findById(id);
+        if (optionalStoredUser.isPresent()) {
+            return optionalStoredUser.get();
+        } else {
+            throw new Exception("User not found");
+        }
+    }
+
     public void resetPassword(String password, Long id) throws Exception {
         Optional<Users> optionalStoredUser = userRepository.findById(id);
         if (optionalStoredUser.isPresent()) {

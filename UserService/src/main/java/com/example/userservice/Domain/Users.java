@@ -22,6 +22,7 @@ public class Users {
     private Long id;
     private String name;
     private String password;
+    @Column(unique=true)
     private String email;
     private String phone;
     @Enumerated(EnumType.STRING)
@@ -45,6 +46,7 @@ public class Users {
         this.setRole(users.getRole());
         this.setEnabled(users.getEnabled());
         this.setCreatedAt(users.getCreatedAt());
+        this.setEmail(users.getEmail());
     }
 
 }

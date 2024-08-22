@@ -1,6 +1,7 @@
 package com.example.userservice.Domain;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,11 +26,14 @@ public class Company extends Users {
     private String socialName;
     private String professionalField;
     private String description;
+    @Column(unique=true)
     private String cnpj;
 
     @ElementCollection
     @CollectionTable(name = "company_expertise", joinColumns = @JoinColumn(name = "company_id"))
     private List<String> expertise = new ArrayList<>();
+
+
 
     public void addExpertise(List<String> expertises) {
         Set<String> currentExpertises = new HashSet<>(expertises);

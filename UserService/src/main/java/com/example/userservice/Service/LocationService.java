@@ -1,9 +1,9 @@
 package com.example.userservice.Service;
 
-import com.example.userservice.Domain.Hirer;
+import com.example.userservice.Client.GeolocationClient;
+import com.example.userservice.Client.ResponseDto.GeolocationDto;
 import com.example.userservice.Domain.Location;
 import com.example.userservice.Domain.Users;
-import com.example.userservice.Dto.HirerUpdateDto;
 import com.example.userservice.Dto.LocationDto;
 import com.example.userservice.Repository.LocationRepository;
 import com.example.userservice.Repository.UserRepository;
@@ -22,6 +22,11 @@ public class LocationService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private GeolocationClient geolocationClient;
+
+    private static final String API_KEY = "9e8b2cb5eb0940b1b480063462cb5286";
 
     public List<Location> listAll(){
         return locationRepository.findAll();
@@ -42,6 +47,10 @@ public class LocationService {
             Users userEntity = usersOptional.get();
             Location locationEntity = new Location();
             BeanUtils.copyProperties(locationDto, locationEntity);
+            String location = locationEntity.getStreet() + ", " + locationEntity.getCity() + " " + locationEntity.getState() + " " + locationEntity.getZipCode() + ", " + locationEntity.getCountry();
+            GeolocationDto geolocationDto = geolocationClient.getLocation(location,"json",API_KEY);
+            locationEntity.setLat(geolocationDto.getResults().get(0).getLat());
+            locationEntity.setLng(geolocationDto.getResults().get(0).getLon());
             userEntity.setLocation(locationEntity);
             userRepository.save(userEntity);
             locationRepository.save(locationEntity);

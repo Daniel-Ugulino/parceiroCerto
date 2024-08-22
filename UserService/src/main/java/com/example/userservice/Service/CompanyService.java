@@ -4,6 +4,7 @@ import com.example.userservice.Domain.Roles;
 import com.example.userservice.Dto.CompanyDto;
 import com.example.userservice.Dto.CompanyUpdateDto;
 import com.example.userservice.Repository.CompanyRepository;
+import com.example.userservice.Utils.ValidateCpfCnpj;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -20,13 +21,17 @@ public class CompanyService {
     private CompanyRepository companyRepository;
 
 
-    public Company save(CompanyDto companyDto){
+    public Company save(CompanyDto companyDto) throws Exception{
         Company companyEntity = new Company();
-        BeanUtils.copyProperties(companyDto, companyEntity);
-        companyEntity.setRole(Roles.COMPANY);
-        companyEntity.setPassword(bCryptPasswordEncoder.encode(companyEntity.getPassword()));
-        companyRepository.save(companyEntity);
-        return companyEntity;
+        if(ValidateCpfCnpj.validateCNPJ(companyDto.getCnpj())) {
+            BeanUtils.copyProperties(companyDto, companyEntity);
+            companyEntity.setRole(Roles.COMPANY);
+            companyEntity.setPassword(bCryptPasswordEncoder.encode(companyEntity.getPassword()));
+            companyRepository.save(companyEntity);
+            return companyEntity;
+        }else {
+            throw new Exception("CNPJ not valid");
+        }
     }
 
     public List<Company> listAll(){

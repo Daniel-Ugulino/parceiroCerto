@@ -5,6 +5,7 @@ import com.example.userservice.Domain.Roles;
 import com.example.userservice.Dto.FreelancerDto;
 import com.example.userservice.Dto.FreelancerUpdateDto;
 import com.example.userservice.Repository.FreelancerRepository;
+import com.example.userservice.Utils.ValidateCpfCnpj;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -20,13 +21,17 @@ public class FreelancerService {
     @Autowired
     private FreelancerRepository freelancerRepository;
 
-    public Freelancer save(FreelancerDto freelancerDto){
+    public Freelancer save(FreelancerDto freelancerDto) throws Exception{
         Freelancer freelancerEntity = new Freelancer();
-        BeanUtils.copyProperties(freelancerDto,freelancerEntity);
-        freelancerEntity.setRole(Roles.FREELANCER);
-        freelancerEntity.setPassword(bCryptPasswordEncoder.encode(freelancerEntity.getPassword()));
-        freelancerRepository.save(freelancerEntity);
-        return freelancerEntity;
+        if(ValidateCpfCnpj.validateCpf(freelancerDto.getCpf())){
+            BeanUtils.copyProperties(freelancerDto,freelancerEntity);
+            freelancerEntity.setRole(Roles.FREELANCER);
+            freelancerEntity.setPassword(bCryptPasswordEncoder.encode(freelancerEntity.getPassword()));
+            freelancerRepository.save(freelancerEntity);
+            return freelancerEntity;
+        }else {
+            throw new Exception("cpf not valid");
+        }
     }
 
     public List<Freelancer> listAll(){

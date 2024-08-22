@@ -23,6 +23,8 @@ import java.util.Set;
 @Table(name = "Freelancer")
 public class Freelancer extends Users {
     private String description;
+    @Column(unique=true)
+    private String cpf;
 
     @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "freelancer_especialidades", joinColumns = @JoinColumn(name = "freelancer_id"))

@@ -5,6 +5,7 @@ import com.example.userservice.Domain.Roles;
 import com.example.userservice.Dto.HirerDto;
 import com.example.userservice.Dto.HirerUpdateDto;
 import com.example.userservice.Repository.HirerRepository;
+import com.example.userservice.Utils.ValidateCpfCnpj;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -21,14 +22,17 @@ public class HirerService {
     @Autowired
     private HirerRepository hirerRepository;
 
-    public Hirer save(HirerDto hirerDto){
+    public Hirer save(HirerDto hirerDto) throws Exception{
         Hirer hirerEntity = new Hirer();
-        BeanUtils.copyProperties(hirerDto,hirerEntity);
-        System.out.println(hirerDto.getCpf());
-        hirerEntity.setRole(Roles.HIRER);
-        hirerEntity.setPassword(bCryptPasswordEncoder.encode(hirerEntity.getPassword()));
-        hirerRepository.save(hirerEntity);
-        return hirerEntity;
+        if(ValidateCpfCnpj.validateCpf(hirerDto.getCpf())){
+            BeanUtils.copyProperties(hirerDto,hirerEntity);
+            hirerEntity.setRole(Roles.HIRER);
+            hirerEntity.setPassword(bCryptPasswordEncoder.encode(hirerEntity.getPassword()));
+            hirerRepository.save(hirerEntity);
+            return hirerEntity;
+        }else {
+            throw new Exception("cpf not valid");
+        }
     }
 
     public List<Hirer> listAll(){

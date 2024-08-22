@@ -1,5 +1,7 @@
 package com.example.userservice.Dto;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -11,11 +13,10 @@ import java.util.Date;
 @Getter
 @Setter
 @NoArgsConstructor
+@Valid
 public class UserUpdateDto {
     @NotBlank
     private String name;
-    @NotBlank
-    private String email;
     @NotBlank
     private String phone;
     @NotBlank
