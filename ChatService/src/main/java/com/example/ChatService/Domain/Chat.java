@@ -7,8 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
-
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -17,18 +17,25 @@ import java.util.Date;
 @Entity
 @Audited
 @AuditTable(value = "chat_audit", schema = "audit")
-@Table(name = "chat")
-@Inheritance(strategy = InheritanceType.JOINED)
 public class Chat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long pedidoId;
-    private Date createdAt;
 
+    @OneToMany(mappedBy = "chat", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Message> messages;
 
-    @PrePersist
-    protected void onCreate() {
-        this.createdAt = new Date();
+    @ElementCollection
+    @CollectionTable(name = "chat_users", joinColumns = @JoinColumn(name = "chat_id"))
+    private List<Long> users = new ArrayList<>(2);
+
+    private Long requestId;
+    private Boolean status = true;
+
+    public void addUser(Long userId) {
+        if (this.users.size() >= 2) {
+            throw new IllegalArgumentException("Cannot add more than 2 users to a chat.");
+        }
+        this.users.add(userId);
     }
 }

@@ -20,6 +20,6 @@ public class FreelancerDto extends UserDto {
     private List<String> expertise;
 
     @NotBlank
-    @Pattern(regexp = "^\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}$", message = "CPF is not valid")
+    @Pattern(regexp = "^\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}$", message = "CNPJ is not valid")
     private String cpf;
 }

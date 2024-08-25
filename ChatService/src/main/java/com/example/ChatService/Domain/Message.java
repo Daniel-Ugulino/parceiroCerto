@@ -17,21 +17,17 @@ import java.util.Date;
 @Entity
 @Audited
 @AuditTable(value = "message_audit", schema = "audit")
-@Table(name = "message")
-@Inheritance(strategy = InheritanceType.JOINED)
 public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToOne(fetch = FetchType.EAGER)
-    private Chat chat;
-
+    private String content;
     private Long sender;
-    private Long receiver;
-    private String message;
-
     private Date createdAt;
 
+    @ManyToOne
+    @JoinColumn(name = "chat_id")
+    private Chat chat;
 
     @PrePersist
     protected void onCreate() {

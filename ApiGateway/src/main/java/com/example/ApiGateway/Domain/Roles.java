@@ -1,8 +1,17 @@
 package com.example.ApiGateway.Domain;
 
-public enum Roles {
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+
+public enum Roles implements GrantedAuthority {
     USER,
     COMPANY,
     FREELANCE,
-    HIRER
+    HIRER;
+
+    @Override
+    public String getAuthority() {
+        return name();
+    }
 }
