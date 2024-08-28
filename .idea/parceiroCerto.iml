@@ -2,7 +2,20 @@
 <module type="JAVA_MODULE" version="4">
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
-    <content url="file://$MODULE_DIR$" />
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/ApiGateway/.idea" />
+      <excludeFolder url="file://$MODULE_DIR$/ApiGateway/target" />
+      <excludeFolder url="file://$MODULE_DIR$/AuthService/.idea" />
+      <excludeFolder url="file://$MODULE_DIR$/AuthService/target" />
+      <excludeFolder url="file://$MODULE_DIR$/ChatService/.idea" />
+      <excludeFolder url="file://$MODULE_DIR$/ChatService/target" />
+      <excludeFolder url="file://$MODULE_DIR$/FeedbackService/.idea" />
+      <excludeFolder url="file://$MODULE_DIR$/FeedbackService/target" />
+      <excludeFolder url="file://$MODULE_DIR$/TaskService/.idea" />
+      <excludeFolder url="file://$MODULE_DIR$/TaskService/target" />
+      <excludeFolder url="file://$MODULE_DIR$/UserService/.idea" />
+      <excludeFolder url="file://$MODULE_DIR$/UserService/target" />
+    </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
