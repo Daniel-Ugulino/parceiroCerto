@@ -49,8 +49,7 @@ public class TaskService {
             }else{
                 taskEntity.setProviderType(Provider.FREELANCER);
             }
-            taskRepository.save(taskEntity);
-            return taskEntity;
+            return taskRepository.save(taskEntity);
         }else{
             throw new Exception("User not enabled");
         }

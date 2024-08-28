@@ -4,8 +4,10 @@ import com.example.taskservice.Client.UserServiceClient;
 import com.example.taskservice.Domain.Enum.RequestStatus;
 import com.example.taskservice.Domain.Request;
 import com.example.taskservice.Domain.Task;
+import com.example.taskservice.Dto.ChatDto;
 import com.example.taskservice.Dto.RequestDto;
 import com.example.taskservice.Dto.RequestUpdateDto;
+import com.example.taskservice.Producer.ChatRequestProducer;
 import com.example.taskservice.Repository.RequestRepository;
 import com.example.taskservice.Repository.TaskRepository;
 import org.springframework.beans.BeanUtils;
@@ -23,20 +25,32 @@ public class RequestService {
     private TaskRepository taskRepository;
     @Autowired
     private UserServiceClient userServiceClient;
-
+    @Autowired
+    private ChatRequestProducer chatRequestProducer;
 
     public Request save(RequestDto requestDto) throws Exception {
         Request requestEntity = new Request();
         Optional<Task> taskOptional = taskRepository.findById(requestDto.getTaskId());
         if(userServiceClient.getUser(requestDto.getUserId()).getData() != null && taskOptional.isPresent()){
             BeanUtils.copyProperties(requestDto, requestEntity);
+
             requestEntity.setUserId(requestDto.getUserId());
             requestEntity.setTask(taskOptional.get());
-            return requestRepository.save(requestEntity);
+            requestRepository.save(requestEntity);
+            ChatDto cDto = new ChatDto(
+                    requestDto.getUserId(),
+                    taskOptional.get().getUserId(),
+                    requestEntity.getId()
+            );
+            System.out.println(cDto.getRequestId());
+            chatRequestProducer.sendMessage(cDto);
+            return requestEntity;
         }else {
             throw new Exception("User not found");
         }
     }
+
+
 
     public Request getById(Long requestId) throws Exception{
         Optional<Request> requestOptional = requestRepository.findById(requestId);

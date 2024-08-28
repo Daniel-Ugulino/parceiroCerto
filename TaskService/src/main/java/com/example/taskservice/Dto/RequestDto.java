@@ -20,7 +20,7 @@ public class RequestDto {
     @NotNull
     private Long taskId;
     @NotNull
-    private Double amount;
+    private Integer amount;
     @NotBlank
     private String notes;
 }

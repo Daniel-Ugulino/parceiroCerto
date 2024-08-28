@@ -1,6 +1,7 @@
 package com.example.taskservice.Domain;
 
 import com.example.taskservice.Domain.Enum.RequestStatus;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,17 +28,21 @@ public class Request {
     private String notes;
     private RequestStatus status = RequestStatus.CREATED;
     private Integer amount;
-    private Double totalPrice = 0D;
+    private Double totalPrice;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "task_id")
     private Task task;
 
     @PrePersist
     @PreUpdate
     public void calculateTotalPrice() {
-        if (task != null && amount != null && task.getPrice() != null) {
-            this.totalPrice = amount * task.getPrice();
+        if (this.task != null && this.amount != null && this.task.getPrice() != null) {
+            this.totalPrice = this.amount * this.task.getPrice();
+        }
+        else {
+            this.totalPrice = 100000.0;
         }
     }
 }
