@@ -1,6 +1,4 @@
 package com.example.taskservice.Domain;
-
-
 import com.example.taskservice.Domain.Enum.Provider;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -9,7 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
-
 import java.util.List;
 
 @Getter
@@ -29,7 +26,8 @@ public class Task {
     private String description;
     private Double price;
     private Long userId;
-    @OneToOne(cascade = CascadeType.PERSIST)
+
+    @ManyToOne
     @JoinColumn(name = "id_category")
     private Category category;
     @Enumerated(EnumType.STRING)

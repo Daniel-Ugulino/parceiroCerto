@@ -1,4 +1,4 @@
-package com.example.BFF.Dto;
+package com.example.BFF.Dto.Enums;
 
 public enum Roles {
     HIRER,

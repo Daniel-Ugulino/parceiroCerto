@@ -24,7 +24,7 @@ public class TaskDto {
     private Long categoryId;
     @NotNull
     private Double price;
-    @NotNull
-    private Provider provider;
+    @NotBlank
+    private String provider;
 
 }

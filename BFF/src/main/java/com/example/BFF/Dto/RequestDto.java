@@ -12,6 +12,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Valid
 public class RequestDto {
+    private Long id;
     @NotBlank
     private String description;
     @NotNull

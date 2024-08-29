@@ -1,4 +1,4 @@
-package com.example.BFF.Dto;
+package com.example.BFF.Clients.ResponseDtos;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Max;
@@ -13,16 +13,17 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @Valid
-public class FeedbackDto {
-    private Long id;
-    @NotNull
-    private Long userId;
-    @NotBlank
-    private String comments;
-    @Min(0)
-    @Max(10)
-    @NotNull
-    private Integer grade;
-    @NotNull
-    private Long taskId;
+public class ResponseFeedbackDto {
+    private data data;
+
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    public static class data {
+        private Long id;
+        private Long userId;
+        private String comments;
+        private Integer grade;
+        private Long taskId;
+    }
 }

@@ -5,6 +5,7 @@ import com.example.taskservice.Dto.TaskDto;
 import com.example.taskservice.Dto.TaskUpdateDto;
 import com.example.taskservice.Service.TaskService;
 import com.example.taskservice.Utils.CustomResponse;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -34,6 +35,7 @@ public class TaskController {
         }
     }
 
+    @JsonIgnoreProperties({"requests"})
     @GetMapping()
     public ResponseEntity<Object> listTasks(
             @RequestParam Double lat,
@@ -53,7 +55,7 @@ public class TaskController {
         }
     }
 
-    @GetMapping("user/{id}")
+    @GetMapping("/user/{id}")
     public ResponseEntity<Object> getByUserId(@PathVariable Long id) {
         try {
             List<Task> taskList = taskService.getByUserId(id);
@@ -66,6 +68,7 @@ public class TaskController {
         }
     }
 
+    @JsonIgnoreProperties({"requests"})
     @GetMapping("/{id}")
     public ResponseEntity<Object> getById(@PathVariable Long id) {
         try {

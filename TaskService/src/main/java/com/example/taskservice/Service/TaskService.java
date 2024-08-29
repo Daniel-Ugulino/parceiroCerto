@@ -1,11 +1,13 @@
 package com.example.taskservice.Service;
 
 import com.example.taskservice.Domain.Category;
+import com.example.taskservice.Domain.Enum.Provider;
 import com.example.taskservice.Domain.Task;
 import com.example.taskservice.Dto.TaskDto;
 import com.example.taskservice.Dto.TaskUpdateDto;
 import com.example.taskservice.Repository.CategoryRepository;
 import com.example.taskservice.Repository.TaskRepository;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,6 +44,12 @@ public class TaskService {
         if(categoryOptional.isPresent()){
             Task taskEntity = new Task();
             BeanUtils.copyProperties(taskDto, taskEntity);
+            System.out.println(taskDto.getProvider());
+            if(taskDto.getProvider().equals(Provider.COMPANY.name())){
+                taskEntity.setProviderType(Provider.COMPANY);
+            }else{
+                taskEntity.setProviderType(Provider.FREELANCER);
+            }
             taskEntity.setCategory(categoryOptional.get());
             return taskRepository.save(taskEntity);
         }else {

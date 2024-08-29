@@ -1,5 +1,6 @@
 package com.example.BFF.Dto;
 
+import com.example.BFF.Dto.Enums.Roles;
 import lombok.*;
 
 import java.util.Date;
