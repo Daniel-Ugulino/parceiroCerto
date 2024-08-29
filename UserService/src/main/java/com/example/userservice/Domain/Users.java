@@ -1,5 +1,6 @@
 package com.example.userservice.Domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.envers.AuditTable;
@@ -21,6 +22,7 @@ public class Users {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    @JsonIgnore
     private String password;
     @Column(unique=true)
     private String email;
@@ -29,6 +31,7 @@ public class Users {
     private Roles role;
     private String gender;
     private Date birthday;
+    @JsonIgnore
     private Date createdAt;
     private Boolean enabled = true;
     @OneToOne(cascade = CascadeType.PERSIST)

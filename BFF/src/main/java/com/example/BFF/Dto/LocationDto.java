@@ -1,6 +1,5 @@
-package com.example.taskservice.Client.ResponseDto;
+package com.example.BFF.Dto;
 
-import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

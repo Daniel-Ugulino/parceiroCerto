@@ -1,6 +1,4 @@
 package com.example.taskservice.Service;
-
-import com.example.taskservice.Client.UserServiceClient;
 import com.example.taskservice.Domain.Enum.RequestStatus;
 import com.example.taskservice.Domain.Request;
 import com.example.taskservice.Domain.Task;
@@ -24,16 +22,14 @@ public class RequestService {
     @Autowired
     private TaskRepository taskRepository;
     @Autowired
-    private UserServiceClient userServiceClient;
-    @Autowired
     private ChatRequestProducer chatRequestProducer;
+
 
     public Request save(RequestDto requestDto) throws Exception {
         Request requestEntity = new Request();
         Optional<Task> taskOptional = taskRepository.findById(requestDto.getTaskId());
-        if(userServiceClient.getUser(requestDto.getUserId()).getData() != null && taskOptional.isPresent()){
+        if(taskOptional.isPresent()){
             BeanUtils.copyProperties(requestDto, requestEntity);
-
             requestEntity.setUserId(requestDto.getUserId());
             requestEntity.setTask(taskOptional.get());
             requestRepository.save(requestEntity);
@@ -49,8 +45,6 @@ public class RequestService {
             throw new Exception("User not found");
         }
     }
-
-
 
     public Request getById(Long requestId) throws Exception{
         Optional<Request> requestOptional = requestRepository.findById(requestId);

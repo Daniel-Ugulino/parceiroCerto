@@ -1,13 +1,13 @@
-package com.example.ChatService;
+package com.example.FeedbackService;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ChatServiceApplication {
+public class FeedbackServiceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ChatServiceApplication.class, args);
+		SpringApplication.run(FeedbackServiceApplication.class, args);
 	}
 
 }

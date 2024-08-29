@@ -20,9 +20,9 @@ public class FeedbackController {
     FeedbackService feedbackService;
 
     @PostMapping()
-    public ResponseEntity<Object> add(@RequestBody @Valid FeedbackDto feedbackDto, @PathVariable Long id) {
+    public ResponseEntity<Object> add(@RequestBody @Valid FeedbackDto feedbackDto) {
         try {
-            Feedback feedbackEntity = feedbackService.save(feedbackDto,id);
+            Feedback feedbackEntity = feedbackService.save(feedbackDto);
             return ResponseEntity.status(HttpStatus.OK).body(new CustomResponse<>("Request Saved Successfully",feedbackEntity));
         } catch (DataIntegrityViolationException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new CustomResponse<>("Data integrity violation"));

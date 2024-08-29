@@ -36,7 +36,7 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
                     if(cookie != null && !cookie.isEmpty()) {
                         String jwt = cookie.get(0).getValue();
                         List<String> roles = tokenProvider.extractRole(jwt);
-                        if (!tokenProvider.isTokenValid(jwt) || !routeValidators.isRoleRequiredForEndpoint(exchange.getRequest(), roles)) {
+                        if (!tokenProvider.isTokenValid(jwt) || !routeValidators.isRoleRequiredForEndpoint(exchange, roles)) {
                             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Invalid Role");
                         }
                     }

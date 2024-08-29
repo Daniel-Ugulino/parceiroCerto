@@ -1,11 +1,8 @@
-package com.example.taskservice.Client.ResponseDto;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+package com.example.BFF.Dto;
+
 import lombok.*;
 
 import java.util.Date;
-import java.util.List;
 
 @Getter
 @Setter
@@ -20,6 +17,7 @@ public class UserDto {
     @AllArgsConstructor
     @NoArgsConstructor
     public static class data{
+        private Long id;
         private String name;
         private String password;
         private String email;

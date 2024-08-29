@@ -1,4 +1,4 @@
-package com.example.FeedbackService.Client.ResponseDto;
+package com.example.BFF.Dto;
 
 public enum Roles {
     HIRER,

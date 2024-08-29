@@ -21,6 +21,7 @@ public class CategoryService {
     public Category save(CategoryDto categoryDto) {
         Category category = new Category();
         BeanUtils.copyProperties(categoryDto, category);
+        category.setTitle(category.getTitle().toLowerCase());
         categoryRepository.save(category);
         return category;
     }
@@ -30,6 +31,7 @@ public class CategoryService {
         if (optionalCategory.isPresent()) {
             Category categoryEntity = optionalCategory.get();
             BeanUtils.copyProperties(categoryDto, categoryEntity);
+            categoryEntity.setTitle(categoryEntity.getTitle().toLowerCase());
             categoryRepository.save(categoryEntity);
             return categoryEntity;
         }else {

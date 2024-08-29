@@ -1,6 +1,5 @@
 package com.example.FeedbackService.Service;
 
-import com.example.FeedbackService.Client.UserServiceClient;
 import com.example.FeedbackService.Domain.Feedback;
 import com.example.FeedbackService.Dto.FeedbackDto;
 import com.example.FeedbackService.Repository.FeedbackRepository;
@@ -15,21 +14,12 @@ import java.util.Optional;
 public class FeedbackService {
     @Autowired
     private FeedbackRepository feedbackRepository;
-    @Autowired
-    private UserServiceClient userServiceClient;
 
-
-    public Feedback save(FeedbackDto feedbackDto, Long userId) throws Exception {
-//        Optional<Task> taskOptional = taskRepository.findById(feedbackDto.getTaskId());
-        if(userServiceClient.getUser(feedbackDto.getUserId()).getData() != null) {
+    public Feedback save(FeedbackDto feedbackDto) throws Exception {
             Feedback feedbackEntity = new Feedback();
             BeanUtils.copyProperties(feedbackDto, feedbackEntity);
-            feedbackEntity.setUserId(userId);
             feedbackRepository.save(feedbackEntity);
             return feedbackEntity;
-        }else{
-            throw new Exception("User is not enabled");
-        }
     }
 
     public List<Feedback> getByTaskId(Long id) throws Exception{

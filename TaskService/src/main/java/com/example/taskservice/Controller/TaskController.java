@@ -22,7 +22,7 @@ public class TaskController {
     private TaskService taskService;
 
     @PostMapping()
-    public ResponseEntity<Object> add(@RequestBody @Valid TaskDto taskDto) {
+    public ResponseEntity<Object> add(@RequestBody  TaskDto taskDto) {
         try {
             Task taskEntity = taskService.save(taskDto);
             return ResponseEntity.status(HttpStatus.OK).body(new CustomResponse<>("Company Saved Successfully",taskEntity));
@@ -53,7 +53,7 @@ public class TaskController {
         }
     }
 
-    @GetMapping("/user/{id}")
+    @GetMapping("user/{id}")
     public ResponseEntity<Object> getByUserId(@PathVariable Long id) {
         try {
             List<Task> taskList = taskService.getByUserId(id);

@@ -1,12 +1,10 @@
 package com.example.taskservice.Service;
 
-import com.example.taskservice.Client.ResponseDto.Roles;
-import com.example.taskservice.Client.ResponseDto.UserDto;
-import com.example.taskservice.Client.UserServiceClient;
-import com.example.taskservice.Domain.Enum.Provider;
+import com.example.taskservice.Domain.Category;
 import com.example.taskservice.Domain.Task;
 import com.example.taskservice.Dto.TaskDto;
 import com.example.taskservice.Dto.TaskUpdateDto;
+import com.example.taskservice.Repository.CategoryRepository;
 import com.example.taskservice.Repository.TaskRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +18,7 @@ public class TaskService {
     @Autowired
     private TaskRepository taskRepository;
     @Autowired
-    private UserServiceClient userServiceClient;
+    private CategoryRepository categoryRepository;
 
     public List<Task> getTask(double lat, double lng, Double distanceRange, String providerType, Long categoryId){
         return taskRepository.findTasksByFilters(providerType,categoryId,lat,lng,distanceRange);
@@ -40,18 +38,14 @@ public class TaskService {
     }
 
     public Task save(TaskDto taskDto) throws Exception{
-        UserDto user = userServiceClient.getUser(taskDto.getUserId());
-        if(user.getData().getEnabled()) {
+        Optional<Category> categoryOptional = categoryRepository.findById(taskDto.getCategoryId());
+        if(categoryOptional.isPresent()){
             Task taskEntity = new Task();
             BeanUtils.copyProperties(taskDto, taskEntity);
-            if(user.getData().getRole() == Roles.COMPANY){
-                taskEntity.setProviderType(Provider.COMPANY);
-            }else{
-                taskEntity.setProviderType(Provider.FREELANCER);
-            }
+            taskEntity.setCategory(categoryOptional.get());
             return taskRepository.save(taskEntity);
-        }else{
-            throw new Exception("User not enabled");
+        }else {
+            throw new Exception("Category not found");
         }
     }
 
@@ -59,7 +53,7 @@ public class TaskService {
         Optional<Task> task = taskRepository.findById(id);
         if(task.isPresent()){
             Task storedTask = task.get();
-            BeanUtils.copyProperties(taskDto, storedTask, "id", "feedbacks", "requests");
+            BeanUtils.copyProperties(taskDto, storedTask, "id", "requests");
             taskRepository.save(storedTask);
             return storedTask;
         }else {

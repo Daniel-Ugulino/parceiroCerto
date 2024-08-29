@@ -1,6 +1,4 @@
-package com.example.taskservice.Dto;
-
-import com.example.taskservice.Domain.Enum.Provider;
+package com.example.BFF.Dto;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -24,7 +22,5 @@ public class TaskDto {
     private Long categoryId;
     @NotNull
     private Double price;
-    @NotNull
-    private Provider provider;
 
 }
