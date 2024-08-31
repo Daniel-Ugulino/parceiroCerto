@@ -76,8 +76,8 @@ public class AuthService {
     }
 
     public void generateTokens(UserDto userDto,HttpServletResponse response) {
-        String accessToken = tokenProvider.generateAccessToken(userDto.getEmail(), userDto.getRole());
-        String refreshToken = tokenProvider.generateRefreshToken(userDto.getEmail(), userDto.getRole());
+        String accessToken = tokenProvider.generateAccessToken(userDto.getEmail(), userDto.getId().toString() ,userDto.getRole());
+        String refreshToken = tokenProvider.generateRefreshToken(userDto.getEmail(), userDto.getId().toString(), userDto.getRole());
 
         Cookie accessTokenCookie = new Cookie("access_token", accessToken);
         accessTokenCookie.setHttpOnly(true);

@@ -1,5 +1,6 @@
 package com.example.ChatService.Domain;
 
+import com.example.ChatService.Audit.UserContext;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -32,5 +33,6 @@ public class Message {
     @PrePersist
     protected void onCreate() {
         this.createdAt = new Date();
+        UserContext.setUserId(this.getSender().toString());
     }
 }

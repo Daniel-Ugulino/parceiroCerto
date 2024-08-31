@@ -1,5 +1,6 @@
 package com.example.userservice.Domain;
 
+import com.example.userservice.Audit.UserContext;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
@@ -41,7 +42,9 @@ public class Users {
     @PrePersist
     protected void onCreate() {
         this.createdAt = new Date();
+        UserContext.setUserId(email);
     }
+
 
     public void reset(Users users){
         this.setId(users.getId());

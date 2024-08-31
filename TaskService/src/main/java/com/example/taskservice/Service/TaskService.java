@@ -7,7 +7,6 @@ import com.example.taskservice.Dto.TaskDto;
 import com.example.taskservice.Dto.TaskUpdateDto;
 import com.example.taskservice.Repository.CategoryRepository;
 import com.example.taskservice.Repository.TaskRepository;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

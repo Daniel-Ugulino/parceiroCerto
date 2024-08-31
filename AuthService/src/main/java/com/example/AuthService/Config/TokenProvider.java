@@ -29,9 +29,8 @@ public class TokenProvider {
     @Value("${jwt.refreshExpiration}")
     public Long refreshTokenExpiration;
 
-
     public String extractEmail(String token) {
-        return extractClaim(token, Claims::getSubject);
+        return extractClaim(token, claims -> claims.get("email", String.class));
     }
 
     public boolean isTokenValid(String token, UserDetails userDetails) {
@@ -61,19 +60,20 @@ public class TokenProvider {
                 .getPayload();
     }
 
-    public String generateAccessToken(String email,Roles role) {
-        return generateToken(email, role,accessTokenExpiration);
+    public String generateAccessToken(String email,String id,Roles role) {
+        return generateToken(email,id, role,accessTokenExpiration);
     }
 
-    public String generateRefreshToken(String email,Roles role) {
-        return generateToken(email, role, refreshTokenExpiration );
+    public String generateRefreshToken(String email,String id,Roles role) {
+        return generateToken(email,id, role, refreshTokenExpiration );
     }
 
-    private String generateToken(String email, Roles role,long expireTime) {
+    private String generateToken(String email,String id, Roles role,long expireTime) {
         return Jwts
                 .builder()
-                .subject(email)
+                .subject(id)
                 .claim("role", role.name())
+                .claim("email", email)
                 .issuedAt(new Date(System.currentTimeMillis()))
                 .expiration(new Date(System.currentTimeMillis() + expireTime ))
                 .signWith(getSigninKey())

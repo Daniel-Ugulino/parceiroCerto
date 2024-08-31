@@ -1,5 +1,6 @@
 package com.example.ChatService.Domain;
 
+import com.example.ChatService.Audit.UserContext;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,6 +9,7 @@ import lombok.Setter;
 import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -37,5 +39,10 @@ public class Chat {
             throw new IllegalArgumentException("Cannot add more than 2 users to a chat.");
         }
         this.users.add(userId);
+    }
+
+    @PrePersist
+    protected void onCreate() {
+        UserContext.setUserId(this.users.get(0).toString());
     }
 }

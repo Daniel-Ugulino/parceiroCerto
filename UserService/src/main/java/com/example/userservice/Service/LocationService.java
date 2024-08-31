@@ -67,6 +67,10 @@ public class LocationService {
             if(userEntity.getLocation() != null){
                 Location locationEntity = userEntity.getLocation();
                 BeanUtils.copyProperties(locationDto,locationEntity);
+                String location = locationEntity.getStreet() + ", " + locationEntity.getCity() + " " + locationEntity.getState() + " " + locationEntity.getZipCode() + ", " + locationEntity.getCountry();
+                GeolocationDto geolocationDto = geolocationClient.getLocation(location,"json",API_KEY);
+                locationEntity.setLat(geolocationDto.getResults().get(0).getLat());
+                locationEntity.setLng(geolocationDto.getResults().get(0).getLon());
                 locationRepository.save(locationEntity);
                 return locationEntity;
             }else {
@@ -76,4 +80,5 @@ public class LocationService {
             throw new Exception("User not found");
         }
     }
+
 }

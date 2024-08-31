@@ -1,17 +1,13 @@
-package com.example.taskservice.Service;
+package com.example.ChatService.Service;
 
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class FeedbackServiceTest {
+class ChatServiceTest {
 
     @Test
     void save() {
-    }
-
-    @Test
-    void getByTaskId() {
     }
 
     @Test
@@ -19,6 +15,6 @@ class FeedbackServiceTest {
     }
 
     @Test
-    void delete() {
+    void getByOrderId() {
     }
 }

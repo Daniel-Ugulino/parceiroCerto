@@ -43,7 +43,7 @@ public class CompanyService {
         if(company.isPresent()){
             return company.get();
         }else {
-            throw new Exception("User not found");
+            throw new Exception("Company not found");
         }
     }
 

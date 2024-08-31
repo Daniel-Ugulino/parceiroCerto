@@ -1,5 +1,6 @@
 package com.example.userservice.Domain;
 
+import com.example.userservice.Audit.UserContext;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,7 +20,7 @@ import org.hibernate.envers.Audited;
 public class Location {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
     private String street;
     private String city;
     private String state;
@@ -27,5 +28,4 @@ public class Location {
     private String country;
     private Double lat;
     private Double lng;
-
 }
