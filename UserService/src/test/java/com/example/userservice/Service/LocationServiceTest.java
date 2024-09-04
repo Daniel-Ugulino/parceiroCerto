@@ -56,7 +56,7 @@ class LocationServiceTest {
         location.setStreet("123 Main St");
         location.setCity("Springfield");
         location.setState("IL");
-        location.setZipCode(62704L);
+        location.setZipCode("62704L");
         location.setCountry("USA");
         MockitoAnnotations.openMocks(this);
     }

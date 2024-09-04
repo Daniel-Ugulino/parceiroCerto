@@ -2,11 +2,10 @@ package com.example.taskservice.Controller;
 
 import com.example.taskservice.Domain.Task;
 import com.example.taskservice.Dto.TaskDto;
-import com.example.taskservice.Dto.TaskListDto;
+import com.example.taskservice.Dto.TaskResponseDto;
 import com.example.taskservice.Dto.TaskUpdateDto;
 import com.example.taskservice.Service.TaskService;
 import com.example.taskservice.Utils.CustomResponse;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -45,7 +44,7 @@ public class TaskController {
             @RequestParam(required = false) Long category
     ) {
         try {
-            List<TaskListDto> taskList = taskService.getTask(lat,lng,distance,provider,category);
+            List<TaskResponseDto> taskList = taskService.getTask(lat,lng,distance,provider,category);
             return ResponseEntity.status(HttpStatus.OK).body(new CustomResponse<>("Task List",taskList));
         } catch (DataIntegrityViolationException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new CustomResponse<>("Data integrity violation"));
@@ -68,12 +67,11 @@ public class TaskController {
         }
     }
 
-    @JsonIgnoreProperties({"requests"})
     @GetMapping("/{id}")
     public ResponseEntity<Object> getById(@PathVariable Long id) {
         try {
-            Task taskEntity = taskService.getById(id);
-            return ResponseEntity.status(HttpStatus.OK).body(new CustomResponse<>("Task:",taskEntity));
+            TaskResponseDto task = taskService.getById(id);
+            return ResponseEntity.status(HttpStatus.OK).body(new CustomResponse<>("Task:",task));
         } catch (DataIntegrityViolationException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new CustomResponse<>("Data integrity violation"));
         } catch (Exception e) {

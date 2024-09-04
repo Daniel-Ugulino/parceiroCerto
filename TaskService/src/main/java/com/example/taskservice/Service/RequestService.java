@@ -49,12 +49,21 @@ public class RequestService {
         }
     }
 
-    public Request getById(Long requestId) throws Exception{
-        Optional<Request> requestOptional = requestRepository.findById(requestId);
+    public Request getById(Long id) throws Exception{
+        Optional<Request> requestOptional = requestRepository.findById(id);
         if(requestOptional.isPresent()){
             return requestOptional.get();
         }else {
             throw new Exception("Request not Found");
+        }
+    }
+
+    public List<Request> getByTaskId(Long taskId) throws Exception{
+        List<Request> requestList = requestRepository.findByTaskId(taskId);
+        if (!requestList.isEmpty()) {
+            return requestList;
+        } else {
+            throw new Exception("Request not found");
         }
     }
 
@@ -87,7 +96,10 @@ public class RequestService {
         Optional<Request> requestOptional = requestRepository.findById(requestId);
         if(requestOptional.isPresent()){
             Request requestEntity = requestOptional.get();
-            BeanUtils.copyProperties(requestDto, requestEntity, "id","taskId","userId","requestStatus","totalPrice");
+            if(requestEntity.getStatus() == RequestStatus.ACCEPTED){
+                throw new Exception("Cannot update accepted request");
+            }
+            BeanUtils.copyProperties(requestDto, requestEntity, "id","taskId","userId","requestStatus","totalPrice","amount");
             requestRepository.save(requestEntity);
             return requestEntity;
         }else {

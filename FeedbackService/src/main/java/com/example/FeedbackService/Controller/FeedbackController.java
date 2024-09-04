@@ -58,6 +58,19 @@ public class FeedbackController {
         }
     }
 
+    @GetMapping("/hirer/{id}")
+    public ResponseEntity<Object> getByHirerId(@PathVariable Long id) {
+        try {
+            List<Feedback> feedbackList = feedbackService.getByHirerId(id);
+            return ResponseEntity.status(HttpStatus.OK).body(new CustomResponse<>("Request, List",feedbackList));
+        } catch (DataIntegrityViolationException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new CustomResponse<>("Data integrity violation"));
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Internal server error");
+        }
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Object> getById(@PathVariable Long id) {
         try {

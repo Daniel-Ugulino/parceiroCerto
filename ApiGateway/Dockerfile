@@ -2,8 +2,8 @@ FROM openjdk:17-jdk-slim
 
 WORKDIR /app
 
-ADD ApiGateway/out/artifacts/ApiGateway_jar/ApiGateway.jar app.jar
+COPY target/ApiGateway-0.0.1-SNAPSHOT.jar /app/ApiGateway.jar
 
 EXPOSE 8080
 
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-jar", "ApiGateway.jar"]

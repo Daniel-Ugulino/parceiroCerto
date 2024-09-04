@@ -16,6 +16,12 @@ public class FeedbackService {
     @Autowired
     private FeedbackRepository feedbackRepository;
 
+    public Feedback save(FeedbackConsumerDto feedbackDto){
+            Feedback feedbackEntity = new Feedback();
+            BeanUtils.copyProperties(feedbackDto, feedbackEntity);
+            feedbackRepository.save(feedbackEntity);
+            return feedbackEntity;
+    }
 
     public Feedback update(FeedbackDto feedbackDto) throws Exception {
         Optional<Feedback> feedbackOptional = feedbackRepository.findByRequestId(feedbackDto.getRequestId());
@@ -41,6 +47,15 @@ public class FeedbackService {
 
     public List<Feedback> getByTaskId(Long id) throws Exception{
         Optional<List<Feedback>> feedbackOptional = feedbackRepository.findByTaskId(id);
+        if(feedbackOptional.isPresent()){
+            return feedbackOptional.get();
+        }else{
+            throw new Exception("Task not found");
+        }
+    }
+
+    public List<Feedback> getByHirerId(Long id) throws Exception{
+        Optional<List<Feedback>> feedbackOptional = feedbackRepository.findByHirerId(id);
         if(feedbackOptional.isPresent()){
             return feedbackOptional.get();
         }else{

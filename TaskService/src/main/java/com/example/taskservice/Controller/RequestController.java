@@ -63,6 +63,19 @@ public class RequestController {
         }
     }
 
+    @GetMapping("/task/{id}")
+    public ResponseEntity<Object> getByTaskId(@PathVariable Long id) {
+        try {
+            List<Request> requestList = requestService.getByTaskId(id);
+            return ResponseEntity.status(HttpStatus.OK).body(new CustomResponse<>("Request",requestList));
+        } catch (DataIntegrityViolationException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new CustomResponse<>("Data integrity violation"));
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Internal server error");
+        }
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<Object> update(@RequestBody @Valid RequestUpdateDto requestDto, @PathVariable Long id) {
         try {

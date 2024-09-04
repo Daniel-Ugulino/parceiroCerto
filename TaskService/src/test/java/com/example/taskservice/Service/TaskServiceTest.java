@@ -5,6 +5,7 @@ import com.example.taskservice.Domain.Enum.Provider;
 import com.example.taskservice.Domain.Task;
 import com.example.taskservice.Dto.CategoryDto;
 import com.example.taskservice.Dto.TaskDto;
+import com.example.taskservice.Dto.TaskResponseDto;
 import com.example.taskservice.Dto.TaskUpdateDto;
 import com.example.taskservice.Repository.CategoryRepository;
 import com.example.taskservice.Repository.TaskRepository;
@@ -43,13 +44,13 @@ class TaskServiceTest {
         this.task.setCategory(new Category(1l,"mecanico"));
         this.task.setDescription("Mecanico Itaguai");
         this.task.setUserId(1L);
-        this.task.setPrice(100.00);
+        this.task.setPrice(100.00F);
     }
 
     @Test
     void getById() throws Exception {
         when(taskRepository.findById(1L)).thenReturn(Optional.of(task));
-        Task taskGet = taskService.getById(1L);
+        TaskResponseDto taskGet = taskService.getById(1L);
         assertNotNull(taskGet);
         assertEquals(taskGet.getId(), task.getId());
         assertEquals(taskGet.getCategory(), task.getCategory());
@@ -83,12 +84,12 @@ class TaskServiceTest {
         when(taskRepository.findById(1L)).thenReturn(Optional.of(task));
         TaskUpdateDto taskUpdateDto = new TaskUpdateDto();
         BeanUtils.copyProperties(task, taskUpdateDto, "id");
-        taskUpdateDto.setPrice(200.00);
+        taskUpdateDto.setPrice(200.00F);
         taskUpdateDto.setDescription("Test test");
 
         Task task = taskService.update(taskUpdateDto,1L);
         assertNotNull(task);
-        assertEquals(200.00, task.getPrice());
+        assertEquals(200.00F, task.getPrice());
         assertEquals("Test test", task.getDescription());
     }
 

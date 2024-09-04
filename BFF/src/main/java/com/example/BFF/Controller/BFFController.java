@@ -68,7 +68,7 @@ public class BFFController {
             String access_token = cookie.getValue();
             UserDto userDto = userServiceClient.getUser(requestDto.getUserId());
             ResponseTaskDto responseTaskDto = taskServiceClient.getById(requestDto.getTaskId(),access_token);
-            if(userDto.getData() != null && responseTaskDto.getData() != null) {
+            if(userDto.getData() != null && responseTaskDto.getData() != null && responseTaskDto.getData().getEnable()) {
                 ResponseRequestDto requestResponse = requestServiceClient.save(requestDto,access_token);
                 requestResponse.getData().setTaskId(requestDto.getTaskId());
                 return ResponseEntity.status(HttpStatus.OK).body(new CustomResponse<>("Request Saved Successfully",requestResponse.getData()));

@@ -99,7 +99,6 @@ class UserServiceTest {
     @Test
     @DisplayName("Activate")
     void activate() throws Exception {
-        when(userRepository.existsById(1L)).thenReturn(true);
         when(userRepository.findById(1L)).thenReturn(Optional.of(users));
         when(userRepository.save(any(Users.class))).thenReturn(users);
         userService.activate(1L);

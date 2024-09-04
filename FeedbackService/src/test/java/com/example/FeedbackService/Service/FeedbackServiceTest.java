@@ -35,9 +35,10 @@ class FeedbackServiceTest {
     void setUp() {
         this.feedback = new Feedback();
         feedback.setId(1L);
-        feedback.setUserId(1L);
-        feedback.setComments("Good work");
+        feedback.setHirerId(1L);
+        feedback.setRequestId(1L);
         feedback.setTaskId(1L);
+        feedback.setComments("Good work");
         feedback.setGrade(10);
         MockitoAnnotations.openMocks(this);
     }

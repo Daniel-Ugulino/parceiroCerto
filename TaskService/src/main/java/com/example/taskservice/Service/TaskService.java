@@ -4,7 +4,7 @@ import com.example.taskservice.Domain.Category;
 import com.example.taskservice.Domain.Enum.Provider;
 import com.example.taskservice.Domain.Task;
 import com.example.taskservice.Dto.TaskDto;
-import com.example.taskservice.Dto.TaskListDto;
+import com.example.taskservice.Dto.TaskResponseDto;
 import com.example.taskservice.Dto.TaskUpdateDto;
 import com.example.taskservice.Repository.CategoryRepository;
 import com.example.taskservice.Repository.TaskRepository;
@@ -23,21 +23,23 @@ public class TaskService {
     @Autowired
     private CategoryRepository categoryRepository;
 
-    public List<TaskListDto> getTask(double lat, double lng, Double distanceRange, String providerType, Long categoryId){
+    public List<TaskResponseDto> getTask(double lat, double lng, Double distanceRange, String providerType, Long categoryId){
         List<Task> tasks= taskRepository.findTasksByFilters(providerType,categoryId,lat,lng,distanceRange);
-        List<TaskListDto> taskListDto = new ArrayList<>();
+        List<TaskResponseDto> taskResponseDto = new ArrayList<>();
         for (Task task : tasks) {
-            TaskListDto dto = new TaskListDto();
+            TaskResponseDto dto = new TaskResponseDto();
             BeanUtils.copyProperties(task, dto);
-            taskListDto.add(dto);
+            taskResponseDto.add(dto);
         }
-        return taskListDto;
+        return taskResponseDto;
     }
 
-    public Task getById(Long id) throws Exception{
+    public TaskResponseDto getById(Long id) throws Exception{
         Optional<Task> task = taskRepository.findById(id);
         if(task.isPresent()){
-            return task.get();
+            TaskResponseDto taskResponseDto = new TaskResponseDto();
+            BeanUtils.copyProperties(task.get(), taskResponseDto);
+            return taskResponseDto;
         }else {
             throw new Exception("Task not found");
         }

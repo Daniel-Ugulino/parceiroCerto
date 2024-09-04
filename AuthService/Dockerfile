@@ -2,8 +2,8 @@ FROM openjdk:17-jdk-slim
 
 WORKDIR /app
 
-ADD ApiGateway/out/artifacts/ApiGateway_jar/ApiGateway.jar app.jar
+COPY target/AuthService-0.0.1-SNAPSHOT.jar /app/AuthService.jar
 
-EXPOSE 8080
+EXPOSE 8089
 
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-jar", "AuthService.jar"]

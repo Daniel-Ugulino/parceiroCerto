@@ -87,11 +87,11 @@ class RequestServiceTest {
         when(requestRepository.findById(1L)).thenReturn(Optional.of(request));
         RequestUpdateDto requestUpdateDto = new RequestUpdateDto();
         BeanUtils.copyProperties(request, requestUpdateDto, "id");
-        requestUpdateDto.setAmount(2);
         requestUpdateDto.setDescription("Test Update");
+        requestUpdateDto.setNotes("Notes Update");
         requestService.update(requestUpdateDto,1L);
         assertNotNull(request);
-        assertEquals(2, request.getAmount());
+        assertEquals("Notes Update", request.getNotes());
         assertEquals("Test Update", request.getDescription());
     }
 }

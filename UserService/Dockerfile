@@ -2,8 +2,8 @@ FROM openjdk:17-jdk-slim
 
 WORKDIR /app
 
-ADD UserService/out/artifacts/UserService_jar/UserService.jar app.jar
+COPY target/UserService-0.0.1-SNAPSHOT.jar /app/UserService.jar
 
-EXPOSE 8081
+EXPOSE 8082
 
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-jar", "UserService.jar"]

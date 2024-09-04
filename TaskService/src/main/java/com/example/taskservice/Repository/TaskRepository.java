@@ -1,7 +1,6 @@
 package com.example.taskservice.Repository;
 
 import com.example.taskservice.Domain.Task;
-import com.example.taskservice.Dto.TaskListDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
