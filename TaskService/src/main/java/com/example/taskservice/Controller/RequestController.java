@@ -5,6 +5,7 @@ import com.example.taskservice.Domain.Request;
 import com.example.taskservice.Domain.Task;
 import com.example.taskservice.Dto.RequestDto;
 import com.example.taskservice.Dto.RequestUpdateDto;
+import com.example.taskservice.Dto.StatusDto;
 import com.example.taskservice.Dto.TaskDto;
 import com.example.taskservice.Service.RequestService;
 import com.example.taskservice.Utils.CustomResponse;
@@ -76,10 +77,10 @@ public class RequestController {
     }
 
 
-    @PatchMapping("/{id}")
-    public ResponseEntity<Object> changeStatus(@PathVariable Long id, @RequestBody RequestStatus requestStatus) {
+    @PatchMapping("/{id}/status")
+    public ResponseEntity<Object> changeStatus(@PathVariable Long id, @RequestBody StatusDto requestStatus) {
         try {
-            Request requestEntity = requestService.changeStatus(id,requestStatus);
+            Request requestEntity = requestService.changeStatus(id,requestStatus.getRequestStatus());
             return ResponseEntity.status(HttpStatus.OK).body(new CustomResponse<>("Request",requestEntity));
         } catch (DataIntegrityViolationException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new CustomResponse<>("Data integrity violation"));

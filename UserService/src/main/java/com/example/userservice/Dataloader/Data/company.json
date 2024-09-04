@@ -1,0 +1,98 @@
+[
+  {
+    "name": "Innovate Solutions Ltda",
+    "password": "securepassword123",
+    "email": "contact@innovatesolutions.com.br",
+    "phone": "+55 21 99876-5432",
+    "gender": "Male",
+    "birthday": "1990-11-10",
+    "socialName": "Innovate Solutions",
+    "professionalField": "Business Consulting",
+    "description": "Specialized in innovation and business consulting.",
+    "cnpj": "45.518.594/0001-65",
+    "expertise": [
+      "Management Consulting",
+      "Business Development",
+      "Market Analysis"
+    ],
+    "location": {
+      "street": "Rua da Consolação",
+      "city": "São Paulo",
+      "state": "SP",
+      "zipCode": "01301-000",
+      "country": "Brazil"
+    }
+  },
+  {
+    "name": "GreenTech Ltda",
+    "email": "contact@greentech.com.br",
+    "password": "anotherpassword456",
+    "phone": "+55 31 98765-4321",
+    "gender": "Female",
+    "birthday": "1982-06-15",
+    "socialName": "GreenTech",
+    "professionalField": "Environmental Technology",
+    "description": "Focused on sustainable technological solutions.",
+    "cnpj": "66.315.289/0001-46",
+    "expertise": [
+      "Green Technology",
+      "Renewable Energy",
+      "Environmental Management"
+    ],
+    "location": {
+      "street": "Avenida Afonso Pena",
+      "city": "Belo Horizonte",
+      "state": "MG",
+      "zipCode": "30130-000",
+      "country": "Brazil"
+    }
+  },
+  {
+    "name": "HealthFirst Ltda",
+    "password": "yetanotherpassword789",
+    "email": "contact@healthfirst.com.br",
+    "phone": "+55 11 92345-6789",
+    "gender": "Female",
+    "birthday": "1978-03-22",
+    "socialName": "HealthFirst",
+    "professionalField": "Health",
+    "description": "Provider of solutions and services for the healthcare sector.",
+    "cnpj": "97.256.463/0001-50",
+    "expertise": [
+      "Telemedicine",
+      "Hospital Management",
+      "Health Technology"
+    ],
+    "location": {
+      "street": "Rua Oscar Freire",
+      "city": "São Paulo",
+      "state": "SP",
+      "zipCode": "01426-001",
+      "country": "Brazil"
+    }
+  },
+  {
+    "name": "EducaTech Ltda",
+    "password": "morepassword101112",
+    "email": "contact@educatech.com.br",
+    "phone": "+55 51 91234-6789",
+    "gender": "Male",
+    "birthday": "1995-12-05",
+    "socialName": "EducaTech",
+    "professionalField": "Education and Technology",
+    "description": "Development of technological solutions for the educational sector.",
+    "cnpj": "44.172.185/0001-97",
+    "expertise": [
+      "Educational Platforms",
+      "Educational Software Development",
+      "E-learning Consulting"
+    ],
+    "location": {
+      "street": "Rua dos Andradas",
+      "city": "Porto Alegre",
+      "state": "RS",
+      "zipCode": "90020-001",
+      "country": "Brazil"
+    }
+  }
+]

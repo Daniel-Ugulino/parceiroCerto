@@ -25,7 +25,7 @@ public class LocationDto {
     private String state;
 
     @NotNull
-    private Long zipCode;
+    private String zipCode;
 
     @NotBlank
     private String country;

@@ -1,0 +1,100 @@
+[
+  {
+    "description": "Start system development",
+    "userId": 11,
+    "taskId": 1,
+    "amount": 3,
+    "notes": "Complete development of the system"
+  },
+  {
+    "description": "Initial environmental consulting",
+    "userId": 12,
+    "taskId": 2,
+    "amount": 1,
+    "notes": "Implementation of sustainable practices"
+  },
+  {
+    "description": "Complete check-up",
+    "userId": 13,
+    "taskId": 3,
+    "amount": 1,
+    "notes": "Exams and medical follow-up"
+  },
+  {
+    "description": "Educational training",
+    "userId": 14,
+    "taskId": 4,
+    "amount": 2,
+    "notes": "Training in innovative teaching techniques"
+  },
+  {
+    "description": "Automobile maintenance",
+    "userId": 15,
+    "taskId": 5,
+    "amount": 1,
+    "notes": "Complete service and parts replacement"
+  },
+  {
+    "description": "Plumbing services",
+    "userId": 11,
+    "taskId": 6,
+    "amount": 1,
+    "notes": "Installation and repair of plumbing systems"
+  },
+  {
+    "description": "Electrical services",
+    "userId": 12,
+    "taskId": 7,
+    "amount": 2,
+    "notes": "Residential electrical repairs and installations"
+  },
+  {
+    "description": "Garden maintenance",
+    "userId": 13,
+    "taskId": 8,
+    "amount": 1,
+    "notes": "Care and beautification of gardens"
+  },
+  {
+    "description": "Post-construction cleaning",
+    "userId": 14,
+    "taskId": 9,
+    "amount": 1,
+    "notes": "Complete cleaning after renovation"
+  },
+  {
+    "description": "Custom carpentry",
+    "userId": 15,
+    "taskId": 10,
+    "amount": 3,
+    "notes": "Creation of custom-made furniture"
+  },
+  {
+    "description": "Legal consulting",
+    "userId": 11,
+    "taskId": 11,
+    "amount": 1,
+    "notes": "Consulting on contracts and legal matters"
+  },
+  {
+    "description": "Irrigation system installation",
+    "userId": 12,
+    "taskId": 12,
+    "amount": 1,
+    "notes": "Installation and maintenance of irrigation systems"
+  },
+  {
+    "description": "Professional photography",
+    "userId": 13,
+    "taskId": 13,
+    "amount": 2,
+    "notes": "Photography services for events and products"
+  },
+  {
+    "description": "Digital marketing consulting",
+    "userId": 14,
+    "taskId": 14,
+    "amount": 3,
+    "notes": "Digital marketing strategies for businesses"
+  }
+]

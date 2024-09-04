@@ -2,6 +2,7 @@ package com.example.taskservice.Controller;
 
 import com.example.taskservice.Domain.Task;
 import com.example.taskservice.Dto.TaskDto;
+import com.example.taskservice.Dto.TaskListDto;
 import com.example.taskservice.Dto.TaskUpdateDto;
 import com.example.taskservice.Service.TaskService;
 import com.example.taskservice.Utils.CustomResponse;
@@ -35,7 +36,6 @@ public class TaskController {
         }
     }
 
-    @JsonIgnoreProperties({"requests"})
     @GetMapping()
     public ResponseEntity<Object> listTasks(
             @RequestParam Double lat,
@@ -45,7 +45,7 @@ public class TaskController {
             @RequestParam(required = false) Long category
     ) {
         try {
-            List<Task> taskList = taskService.getTask(lat,lng,distance,provider,category);
+            List<TaskListDto> taskList = taskService.getTask(lat,lng,distance,provider,category);
             return ResponseEntity.status(HttpStatus.OK).body(new CustomResponse<>("Task List",taskList));
         } catch (DataIntegrityViolationException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new CustomResponse<>("Data integrity violation"));

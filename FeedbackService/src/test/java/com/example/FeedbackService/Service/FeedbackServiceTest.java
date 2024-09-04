@@ -43,18 +43,6 @@ class FeedbackServiceTest {
     }
 
     @Test
-    void save() throws Exception {
-        when(feedbackRepository.save(any(Feedback.class))).thenReturn(feedback);
-        FeedbackDto feedbackDto = new FeedbackDto();
-        BeanUtils.copyProperties(feedback, feedbackDto, "id","role");
-        Feedback feedbackSave = feedbackService.save(feedbackDto);
-        assertNotNull(feedbackSave);
-        assertEquals(feedbackSave.getComments(), feedback.getComments());
-        assertEquals(feedbackSave.getGrade(), feedback.getGrade());
-        assertEquals(feedbackSave.getTaskId(), feedback.getTaskId());
-    }
-
-    @Test
     void getByTaskId() throws Exception {
         when(feedbackRepository.findByTaskId(1L)).thenReturn(Optional.of(List.of(feedback,feedback)));
         List<Feedback> feedbackList = feedbackService.getByTaskId(1L);

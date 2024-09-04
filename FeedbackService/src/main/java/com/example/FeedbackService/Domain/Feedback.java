@@ -22,9 +22,10 @@ public class Feedback {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long userId;
+    private Long hirerId;
     private String comments;
     private Long taskId;
+    private Long requestId;
     @Min(0)
     @Max(10)
     private Integer grade;

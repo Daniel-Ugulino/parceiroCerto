@@ -76,7 +76,7 @@ class RequestServiceTest {
     void changeStatus() throws Exception {
         when(requestRepository.save(any(Request.class))).thenReturn(request);
         when(requestRepository.findById(1L)).thenReturn(Optional.of(request));
-        Request request = requestService.changeStatus(1L,RequestStatus.ACCEPTED);
+        Request request = requestService.changeStatus(1L,"ACCEPTED");
         assertNotNull(request);
         assertEquals(RequestStatus.ACCEPTED, request.getStatus());
     }

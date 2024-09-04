@@ -16,7 +16,7 @@ public class ChatRequestProducer {
 
     public void sendMessage(ChatDto chatDto) throws JsonProcessingException {
     amqpTemplate.convertAndSend(
-            "chat-request",
+            "chat-exchange",
             "chat-routing-key",
             objectMapper.writeValueAsString(chatDto)
     );

@@ -1,8 +1,6 @@
 package com.example.BFF.Controller;
 
-import com.example.BFF.Clients.FeedbackServiceClient;
 import com.example.BFF.Clients.RequestServiceClient;
-import com.example.BFF.Clients.ResponseDtos.ResponseFeedbackDto;
 import com.example.BFF.Clients.ResponseDtos.ResponseRequestDto;
 import com.example.BFF.Clients.ResponseDtos.ResponseTaskDto;
 import com.example.BFF.Clients.TaskServiceClient;
@@ -31,9 +29,6 @@ public class BFFController {
 
     @Autowired
     TaskServiceClient taskServiceClient;
-
-    @Autowired
-    FeedbackServiceClient feedbackServiceClient;
 
     @Autowired
     UserServiceClient userServiceClient;
@@ -84,24 +79,4 @@ public class BFFController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Internal server error");
         }
     }
-
-    @PostMapping("/feedback")
-    public ResponseEntity<Object> feddbackSave(@RequestBody @Valid FeedbackDto feedbackDto,HttpServletRequest request) {
-        try {
-            Cookie cookie = WebUtils.getCookie(request,"access_token");
-            assert cookie != null;
-            String access_token = cookie.getValue();
-            UserDto userDto = userServiceClient.getUser(feedbackDto.getUserId());
-            ResponseTaskDto responseTaskDto = taskServiceClient.getById(feedbackDto.getTaskId(),access_token);
-            if(userDto.getData() != null && responseTaskDto.getData() != null) {
-                ResponseFeedbackDto feedbackResponse = feedbackServiceClient.save(feedbackDto,access_token);
-                return ResponseEntity.status(HttpStatus.OK).body(new CustomResponse<>("Feedback Saved Successfully",feedbackResponse.getData()));
-            }
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Internal server error");
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Internal server error");
-        }
-    }
-
 }

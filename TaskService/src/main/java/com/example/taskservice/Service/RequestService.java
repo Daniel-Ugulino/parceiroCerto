@@ -6,6 +6,8 @@ import com.example.taskservice.Dto.ChatDto;
 import com.example.taskservice.Dto.RequestDto;
 import com.example.taskservice.Dto.RequestUpdateDto;
 import com.example.taskservice.Producer.ChatRequestProducer;
+import com.example.taskservice.Producer.FeedbackDto;
+import com.example.taskservice.Producer.FeedbackRequestProducer;
 import com.example.taskservice.Repository.RequestRepository;
 import com.example.taskservice.Repository.TaskRepository;
 import org.springframework.beans.BeanUtils;
@@ -23,6 +25,8 @@ public class RequestService {
     private TaskRepository taskRepository;
     @Autowired
     private ChatRequestProducer chatRequestProducer;
+    @Autowired
+    private FeedbackRequestProducer feedbackRequestProducer;
 
 
     public Request save(RequestDto requestDto) throws Exception {
@@ -38,7 +42,6 @@ public class RequestService {
                     taskOptional.get().getUserId(),
                     requestEntity.getId()
             );
-            System.out.println(cDto.getRequestId());
             chatRequestProducer.sendMessage(cDto);
             return requestEntity;
         }else {
@@ -59,11 +62,20 @@ public class RequestService {
         return requestRepository.findByUserId(userId);
     }
 
-    public Request changeStatus(Long requestId, RequestStatus requestStatus) throws Exception{
+    public Request changeStatus(Long requestId, String requestStatus) throws Exception{
         Optional<Request> requestOptional = requestRepository.findById(requestId);
         if(requestOptional.isPresent()){
             Request requestEntity = requestOptional.get();
-            requestEntity.setStatus(requestStatus);
+            System.out.println(requestStatus);
+            requestEntity.setStatus(RequestStatus.valueOf(requestStatus));
+            if(requestEntity.getStatus() == RequestStatus.DONE){
+                FeedbackDto fDto = new FeedbackDto(
+                        requestEntity.getUserId(),
+                        requestEntity.getTask().getId(),
+                        requestEntity.getId()
+                );
+                feedbackRequestProducer.sendMessage(fDto);
+            }
             requestRepository.save(requestEntity);
             return requestEntity;
         }else {

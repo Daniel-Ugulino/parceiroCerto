@@ -2,6 +2,7 @@ package com.example.userservice.Domain;
 
 import com.example.userservice.Audit.UserContext;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.envers.AuditTable;
@@ -23,7 +24,7 @@ public class Users {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
     @Column(unique=true)
     private String email;
@@ -44,8 +45,7 @@ public class Users {
         this.createdAt = new Date();
         UserContext.setUserId(email);
     }
-
-
+    
     public void reset(Users users){
         this.setId(users.getId());
         this.setPassword(users.getPassword());

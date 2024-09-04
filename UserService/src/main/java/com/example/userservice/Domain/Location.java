@@ -24,7 +24,7 @@ public class Location {
     private String street;
     private String city;
     private String state;
-    private Long zipCode;
+    private String zipCode;
     private String country;
     private Double lat;
     private Double lng;

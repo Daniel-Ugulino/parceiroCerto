@@ -51,9 +51,9 @@ public class LocationService {
             GeolocationDto geolocationDto = geolocationClient.getLocation(location,"json",API_KEY);
             locationEntity.setLat(geolocationDto.getResults().get(0).getLat());
             locationEntity.setLng(geolocationDto.getResults().get(0).getLon());
+            locationRepository.save(locationEntity);
             userEntity.setLocation(locationEntity);
             userRepository.save(userEntity);
-            locationRepository.save(locationEntity);
             return locationEntity;
         } else {
             throw new Exception("User not found");

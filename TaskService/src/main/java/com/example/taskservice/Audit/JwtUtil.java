@@ -33,7 +33,6 @@ public class JwtUtil {
     }
 
     private SecretKey getSigninKey() {
-        System.out.println(secret);
         byte[] keyBytes = Decoders.BASE64URL.decode(secret);
         return Keys.hmacShaKeyFor(keyBytes);
     }

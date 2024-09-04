@@ -1,6 +1,7 @@
 package com.example.taskservice.Repository;
 
 import com.example.taskservice.Domain.Task;
+import com.example.taskservice.Dto.TaskListDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -14,7 +15,7 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
 
     @Query(value = "SELECT t.* FROM task t "
             + "JOIN users u ON t.user_id = u.id "
-            + "JOIN location l ON u.id_location = l.id " // Assuming 'location_id' is the foreign key in 'users'
+            + "JOIN location l ON u.id_location = l.id "
             + "WHERE "
             + "(t.provider_type = :providerType OR :providerType IS NULL) "
             + "AND (t.id_category = :categoryId OR :categoryId IS NULL) "

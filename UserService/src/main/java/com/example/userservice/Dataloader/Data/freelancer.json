@@ -1,0 +1,112 @@
+[
+  {
+    "description": "Automotive Mechanic",
+    "cpf": "255.633.220-41",
+    "expertise": ["Engine maintenance", "Oil change", "Fault diagnosis"],
+    "name": "João Silva",
+    "password": "senhaMecanico123",
+    "email": "joao.silva@mecanico.com",
+    "phone": "+5511998765432",
+    "role": "FREELANCER",
+    "gender": "MALE",
+    "birthday": "1980-07-12",
+    "enabled": true,
+    "location": {
+      "street": "Rua dos Três Irmãos, 100",
+      "city": "São Paulo",
+      "state": "SP",
+      "zipCode": "05615-190",
+      "country": "Brazil"
+    }
+  },
+  {
+    "description": "Plumber",
+    "cpf": "316.626.123-03",
+    "expertise": ["Hydraulic installation", "Unclogging", "Leak repair"],
+    "name": "Carlos Pereira",
+    "password": "senhaEncanador456",
+    "email": "carlos.pereira@encanador.com",
+    "phone": "+5511987654321",
+    "gender": "MALE",
+    "birthday": "1975-03-15",
+    "location": {
+      "street": "Avenida Atlântica, 300",
+      "city": "Rio de Janeiro",
+      "state": "RJ",
+      "zipCode": "22070-002",
+      "country": "Brazil"
+    }
+  },
+  {
+    "description": "Residential Electrician",
+    "cpf": "643.547.863-54",
+    "expertise": ["Electrical installation", "Wiring maintenance", "Breaker replacement"],
+    "name": "Paula Santos",
+    "password": "minhaSenhaEletricista789",
+    "email": "paula.santos@eletricista.com",
+    "phone": "+5511976543210",
+    "gender": "FEMALE",
+    "birthday": "1988-05-20",
+    "location": {
+      "street": "Rua Professor Moraes, 120",
+      "city": "Belo Horizonte",
+      "state": "MG",
+      "zipCode": "30150-002",
+      "country": "Brazil"
+    }
+  },
+  {
+    "description": "Gardener",
+    "cpf": "999.799.498-13",
+    "expertise": ["Tree pruning", "Garden maintenance", "Flower planting"],
+    "name": "Luiz Oliveira",
+    "password": "senhaJardineiro123",
+    "email": "luiz.oliveira@jardineiro.com",
+    "phone": "+5511965432109",
+    "gender": "MALE",
+    "birthday": "1978-11-25",
+    "location": {
+      "street": "Rua dos Jacarandás, 75",
+      "city": "Curitiba",
+      "state": "PR",
+      "zipCode": "80410-050",
+      "country": "Brazil"
+    }
+  },
+  {
+    "description": "Cleaner",
+    "cpf": "855.058.641-20",
+    "expertise": ["House cleaning", "Organizing spaces", "Post-construction cleaning"],
+    "name": "Maria Souza",
+    "password": "senhaFaxineira456",
+    "email": "maria.souza@faxineira.com",
+    "phone": "+5511934567890",
+    "gender": "FEMALE",
+    "birthday": "1983-06-10",
+    "location": {
+      "street": "Rua da Paz, 1000",
+      "city": "Fortaleza",
+      "state": "CE",
+      "zipCode": "60060-000",
+      "country": "Brazil"
+    }
+  },
+  {
+    "description": "Carpenter",
+    "cpf": "633.049.034-10",
+    "expertise": ["Furniture construction", "Wood repairs", "Cabinet installation"],
+    "name": "José Almeida",
+    "password": "senhaCarpinteiro789",
+    "email": "jose.almeida@carpinteiro.com",
+    "phone": "+5511945678901",
+    "gender": "MALE",
+    "birthday": "1970-09-30",
+    "location": {
+      "street": "Avenida Paulista, 200",
+      "city": "São Paulo",
+      "state": "SP",
+      "zipCode": "01311-000",
+      "country": "Brazil"
+    }
+  }
+]

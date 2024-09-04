@@ -8,4 +8,7 @@ import java.util.Optional;
 
 public interface FeedbackRepository extends JpaRepository<Feedback, Long> {
     Optional<List<Feedback>> findByTaskId(Long id);
+
+    Optional<Feedback> findByRequestId(Long id);
+
 }

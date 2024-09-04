@@ -19,11 +19,24 @@ public class FeedbackController {
     @Autowired
     FeedbackService feedbackService;
 
-    @PostMapping()
-    public ResponseEntity<Object> add(@RequestBody @Valid FeedbackDto feedbackDto) {
+    @PutMapping()
+    public ResponseEntity<Object> update(@RequestBody @Valid FeedbackDto feedbackDto) {
         try {
-            Feedback feedbackEntity = feedbackService.save(feedbackDto);
+            Feedback feedbackEntity = feedbackService.update(feedbackDto);
             return ResponseEntity.status(HttpStatus.OK).body(new CustomResponse<>("Request Saved Successfully",feedbackEntity));
+        } catch (DataIntegrityViolationException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new CustomResponse<>("Data integrity violation"));
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Internal server error");
+        }
+    }
+
+    @GetMapping("/request/{id}")
+    public ResponseEntity<Object> getByRequestId(@PathVariable Long id) {
+        try {
+            Feedback feedback = feedbackService.getByRequestId(id);
+            return ResponseEntity.status(HttpStatus.OK).body(new CustomResponse<>("Request List",feedback));
         } catch (DataIntegrityViolationException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new CustomResponse<>("Data integrity violation"));
         } catch (Exception e) {

@@ -24,7 +24,7 @@ public class Task {
 
     private String title;
     private String description;
-    private Double price;
+    private Float price;
     private Long userId;
 
     @ManyToOne

@@ -26,9 +26,10 @@ public class Request {
     private String description;
     private Long userId;
     private String notes;
+    @Enumerated(EnumType.STRING)
     private RequestStatus status = RequestStatus.CREATED;
     private Integer amount;
-    private Double totalPrice;
+    private Float totalPrice;
 
     @ManyToOne
     @JsonIgnore
@@ -42,7 +43,7 @@ public class Request {
             this.totalPrice = this.amount * this.task.getPrice();
         }
         else {
-            this.totalPrice = 100000.0;
+            this.totalPrice = 0F;
         }
     }
 }

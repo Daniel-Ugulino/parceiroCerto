@@ -1,0 +1,82 @@
+[
+  {
+    "cpf": "595.681.460-83",
+    "name": "Ana Paula Silva",
+    "password": "senhaGerente123",
+    "email": "ana.silva@empresa.com",
+    "phone": "+5511991234567",
+    "gender": "FEMALE",
+    "birthday": "1980-02-14",
+    "location": {
+      "street": "Avenida Paulista, 1578",
+      "city": "São Paulo",
+      "state": "SP",
+      "zipCode": "01310-200",
+      "country": "Brazil"
+    }
+  },
+  {
+    "cpf": "755.127.396-46",
+    "name": "Bruno Costa",
+    "password": "senhaMarketing456",
+    "email": "bruno.costa@empresa.com",
+    "phone": "+5511987654321",
+    "gender": "MALE",
+    "birthday": "1975-11-22",
+    "location": {
+      "street": "Avenida Rio Branco, 156",
+      "city": "Rio de Janeiro",
+      "state": "RJ",
+      "zipCode": "20040-003",
+      "country": "Brazil"
+    }
+  },
+  {
+    "cpf": "144.467.356-40",
+    "name": "Carla Almeida",
+    "password": "senhaAnalista789",
+    "email": "carla.almeida@empresa.com",
+    "phone": "+5511976543210",
+    "gender": "FEMALE",
+    "birthday": "1988-08-30",
+    "location": {
+      "street": "Rua da Bahia, 1142",
+      "city": "Belo Horizonte",
+      "state": "MG",
+      "zipCode": "30160-011",
+      "country": "Brazil"
+    }
+  },
+  {
+    "cpf": "543.338.048-33",
+    "name": "Diego Martins",
+    "password": "senhaFinanceiro123",
+    "email": "diego.martins@empresa.com",
+    "phone": "+5511965432109",
+    "gender": "MALE",
+    "birthday": "1982-04-18",
+    "location": {
+      "street": "Rua dos Três Irmãos, 100",
+      "city": "São Paulo",
+      "state": "SP",
+      "zipCode": "02044-000",
+      "country": "Brazil"
+    }
+  },
+  {
+    "cpf": "214.680.699-00",
+    "name": "Elaine Rodrigues",
+    "password": "senhaRH456",
+    "email": "elaine.rodrigues@empresa.com",
+    "phone": "+5511954321098",
+    "gender": "FEMALE",
+    "birthday": "1990-07-19",
+    "location": {
+      "street": "Avenida Ipiranga, 2000",
+      "city": "Porto Alegre",
+      "state": "RS",
+      "zipCode": "90040-000",
+      "country": "Brazil"
+    }
+  }
+]

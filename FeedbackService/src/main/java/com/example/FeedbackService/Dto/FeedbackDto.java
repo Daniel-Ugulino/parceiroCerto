@@ -15,7 +15,7 @@ import lombok.Setter;
 @Valid
 public class FeedbackDto {
     @NotNull
-    private Long userId;
+    private Long requestId;
 
     @NotBlank
     private String comments;
@@ -25,6 +25,4 @@ public class FeedbackDto {
     @NotNull
     private Integer grade;
 
-    @NotNull
-    private Long taskId;
 }

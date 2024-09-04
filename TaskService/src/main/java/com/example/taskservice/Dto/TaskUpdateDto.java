@@ -21,5 +21,5 @@ public class TaskUpdateDto {
     @NotNull
     private Category category;
     @NotNull
-    private Double price;
+    private Float price;
 }

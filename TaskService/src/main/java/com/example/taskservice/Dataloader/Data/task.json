@@ -1,0 +1,120 @@
+[
+  {
+    "title": "Software Development",
+    "description": "Development of a management system for businesses.",
+    "price": 12000.00,
+    "userId": 1,
+    "categoryId": 1,
+    "provider": "COMPANY"
+  },
+  {
+    "title": "Environmental Consulting",
+    "description": "Consulting for implementing sustainable practices.",
+    "price": 8000.00,
+    "userId": 2,
+    "categoryId": 2,
+    "provider": "COMPANY"
+  },
+  {
+    "title": "Complete Check-up",
+    "description": "Comprehensive exams and medical follow-up.",
+    "price": 5000.00,
+    "userId": 3,
+    "categoryId": 3,
+    "provider": "COMPANY"
+  },
+  {
+    "title": "Educational Training",
+    "description": "Training in innovative teaching techniques.",
+    "price": 3500.00,
+    "userId": 4,
+    "categoryId": 4,
+    "provider": "COMPANY"
+  },
+  {
+    "title": "Automobile Maintenance",
+    "description": "Complete service and parts replacement.",
+    "price": 1500.00,
+    "userId": 5,
+    "categoryId": 5,
+    "provider": "FREELANCER"
+  },
+  {
+    "title": "Plumbing Services",
+    "description": "Installation and repair of plumbing systems.",
+    "price": 2000.00,
+    "userId": 6,
+    "categoryId": 6,
+    "provider": "FREELANCER"
+
+  },
+  {
+    "title": "Electrical Services",
+    "description": "Residential electrical repairs and installations.",
+    "price": 1800.00,
+    "userId": 7,
+    "categoryId": 7,
+    "provider": "FREELANCER"
+
+  },
+  {
+    "title": "Garden Maintenance",
+    "description": "Care and beautification of gardens.",
+    "price": 1200.00,
+    "userId": 8,
+    "categoryId": 8,
+    "provider": "FREELANCER"
+
+  },
+  {
+    "title": "Post-Construction Cleaning",
+    "description": "Complete cleaning of properties after renovation.",
+    "price": 1000.00,
+    "userId": 9,
+    "categoryId": 9,
+    "provider": "FREELANCER"
+
+  },
+  {
+    "title": "Custom Carpentry",
+    "description": "Creation of custom-made furniture.",
+    "price": 3500.00,
+    "userId": 10,
+    "categoryId": 10,
+    "provider": "FREELANCER"
+
+  },
+  {
+    "title": "Legal Consulting",
+    "description": "Consulting on contracts and legal matters.",
+    "price": 10000.00,
+    "userId": 1,
+    "categoryId": 1,
+    "provider": "COMPANY"
+  },
+  {
+    "title": "Irrigation System Installation",
+    "description": "Installation and maintenance of irrigation systems.",
+    "price": 4000.00,
+    "userId": 8,
+    "categoryId": 8,
+    "provider": "FREELANCER"
+
+  },
+  {
+    "title": "Professional Photography",
+    "description": "Photography services for events and products.",
+    "price": 2500.00,
+    "userId": 3,
+    "categoryId": 3,
+    "provider": "COMPANY"
+  },
+  {
+    "title": "Digital Marketing Consulting",
+    "description": "Digital marketing strategies for businesses.",
+    "price": 1100.00,
+    "userId": 2,
+    "categoryId": 2,
+    "provider": "COMPANY"
+  }
+]
