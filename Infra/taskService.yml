@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: task-service
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: task-service
+  template:
+    metadata:
+      labels:
+        app: task-service
+    spec:
+      containers:
+        - name: task-service
+          image: danielugulino/taskservice:latest
+          ports:
+            - containerPort: 8083
+          env:
+            - name: DBSOURCE
+              value: parceiroCertoDB
+            - name: DBUSER
+              value: postgres
+            - name: DBPASSWORD
+              value: ugulino10
+            - name: DBHOST
+              value: postgis
+            - name: DBPORT
+              value: "5432"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: task-service
+spec:
+  type: ClusterIP
+  selector:
+    app: task-service
+  ports:
+    - port: 8083
+      targetPort: 8083

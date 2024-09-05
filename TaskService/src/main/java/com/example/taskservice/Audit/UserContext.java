@@ -3,8 +3,8 @@ package com.example.taskservice.Audit;
 public class UserContext {
     private static final ThreadLocal<String> context = new ThreadLocal<>();
 
-    public static void setUserId(String userEmail) {
-        context.set(userEmail);
+    public static void setUserId(String userId) {
+        context.set(userId);
     }
 
     static String getUserId() {

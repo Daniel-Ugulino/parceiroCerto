@@ -1,5 +1,6 @@
 package com.example.userservice.Service;
 
+import com.example.userservice.Audit.UserContext;
 import com.example.userservice.Domain.Hirer;
 import com.example.userservice.Domain.Roles;
 import com.example.userservice.Dto.HirerDto;
@@ -28,6 +29,7 @@ public class HirerService {
             BeanUtils.copyProperties(hirerDto,hirerEntity);
             hirerEntity.setRole(Roles.HIRER);
             hirerEntity.setPassword(bCryptPasswordEncoder.encode(hirerEntity.getPassword()));
+            UserContext.setUserId(hirerEntity.getEmail());
             hirerRepository.save(hirerEntity);
             return hirerEntity;
         }else {

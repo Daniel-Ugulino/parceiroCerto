@@ -1,0 +1,53 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: rabbitmq-config
+data:
+  rabbitmq.config: |
+    {"rabbit_version":"3.13.6","rabbitmq_version":"3.13.6","product_name":"RabbitMQ","product_version":"3.13.6","users":[{"name":"guest","password_hash":"R6t+4TfTPtZgvaCgm/JA3PHjiu/IyAIrFalVge35EfRBSs0h","hashing_algorithm":"rabbit_password_hashing_sha256","tags":["administrator"],"limits":{}}],"vhosts":[{"name":"/","description":"Default virtual host","tags":[],"metadata":{"description":"Default virtual host","tags":[]}}],"permissions":[{"user":"guest","vhost":"/","configure":".*","write":".*","read":".*"}],"topic_permissions":[],"parameters":[],"global_parameters":[{"name":"internal_cluster_id","value":"rabbitmq-cluster-id-0cuTDbl9YJIRA1l8ZBtTSg"}],"policies":[],"queues":[{"name":"chat-queue","vhost":"/","durable":true,"auto_delete":false,"arguments":{}},{"name":"feedback-queue","vhost":"/","durable":true,"auto_delete":false,"arguments":{}}],"exchanges":[{"name":"feedback-exchange","vhost":"/","type":"direct","durable":true,"auto_delete":false,"internal":false,"arguments":{}},{"name":"chat-exchange","vhost":"/","type":"direct","durable":true,"auto_delete":false,"internal":false,"arguments":{}}],"bindings":[{"source":"chat-exchange","vhost":"/","destination":"chat-queue","destination_type":"queue","routing_key":"chat-routing-key","arguments":{}},{"source":"feedback-exchange","vhost":"/","destination":"feedback-queue","destination_type":"queue","routing_key":"feedback-routing-key","arguments":{}}]}.
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rabbitmq
+  labels:
+    app: rabbitmq
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rabbitmq
+  template:
+    metadata:
+      labels:
+        app: rabbitmq
+    spec:
+      containers:
+        - name: rabbitmq
+          image: rabbitmq:3-management
+          ports:
+            - containerPort: 5672
+            - containerPort: 15672
+          volumeMounts:
+            - name: rabbitmq-config
+              mountPath: /etc/rabbitmq
+              subPath: rabbitmq.config
+      volumes:
+        - name: rabbitmq-config
+          configMap:
+            name: rabbitmq-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rabbitmq
+spec:
+  ports:
+    - port: 5672
+      targetPort: 5672
+      name: amqp
+    - port: 15672
+      targetPort: 15672
+      name: management
+  selector:
+    app: rabbitmq

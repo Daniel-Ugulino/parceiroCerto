@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chat-service
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: chat-service
+  template:
+    metadata:
+      labels:
+        app: chat-service
+    spec:
+      containers:
+        - name: chat-service
+          image: danielugulino/chatservice:latest
+          ports:
+            - containerPort: 8084
+          env:
+            - name: DBSOURCE
+              value: parceiroCertoDB
+            - name: DBUSER
+              value: postgres
+            - name: DBPASSWORD
+              value: ugulino10
+            - name: DBHOST
+              value: postgis
+            - name: DBPORT
+              value: "5432"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: chat-service
+spec:
+  type: ClusterIP
+  selector:
+    app: chat-service
+  ports:
+    - port: 8084
+      targetPort: 8084

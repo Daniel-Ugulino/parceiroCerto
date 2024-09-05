@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgis
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: postgis
+  template:
+    metadata:
+      labels:
+        app: postgis
+    spec:
+      containers:
+        - name: postgis
+          image: postgis/postgis
+          env:
+            - name: POSTGRES_DB
+              value: parceiroCertoDB
+            - name: POSTGRES_USER
+              value: postgres
+            - name: POSTGRES_PASSWORD
+              value: ugulino10
+          ports:
+            - containerPort: 5432
+          lifecycle:
+            postStart:
+              exec:
+                command: [ "/bin/bash","-c","sleep 20 && PGPASSWORD=postgres psql parceiroCertoDB -U postgres -c \'CREATE SCHEMA IF NOT EXISTS audit;\'" ]
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgis
+spec:
+  type: ClusterIP
+  selector:
+    app: postgis
+  ports:
+    - port: 5432
+      targetPort: 5432
