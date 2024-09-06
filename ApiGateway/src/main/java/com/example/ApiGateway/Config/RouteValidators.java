@@ -9,10 +9,17 @@ import java.util.List;
 
 @Component
 public class RouteValidators {
+
+    private static final List<String> OPEN_POST_ROUTES = List.of("/hirer", "/freelancer", "/company");
+
     public boolean isRoleRequiredForEndpoint(ServerWebExchange exchange, List<String> roles) {
         ServerHttpRequest request = exchange.getRequest();
         String requestPath = request.getURI().getPath();
         HttpMethod requestMethod = request.getMethod();
+
+        if (requestMethod == HttpMethod.POST && OPEN_POST_ROUTES.stream().anyMatch(requestPath::startsWith)) {
+            return false;
+        }
 
         return Routes.ROUTES_LIST.stream()
                 .filter(route -> requestPath.matches(route.getPath()))

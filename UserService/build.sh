@@ -4,6 +4,7 @@ export DBSOURCE=parceiroCertoDB
 export DBUSER=postgres
 export DBPORT=5432
 export DTSOURCE=src/main/java/com/example/userservice/Dataloader/Data/
+export EUREKASERVER=http://localhost:8761/eureka/
 
 ./mvnw clean package
 

@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: user-service
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: user-service
@@ -28,6 +28,8 @@ spec:
               value: "5432"
             - name: DTSOURCE
               value: "/app/data/"
+            - name: EUREKASERVER
+              value: "http://server-registry:8761/eureka/"
           ports:
             - containerPort: 8082
 ---

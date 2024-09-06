@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: bff
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: bff
@@ -17,6 +17,9 @@ spec:
           image: danielugulino/bff:latest
           ports:
             - containerPort: 8086
+          env:
+          - name: EUREKASERVER
+            value: "http://server-registry:8761/eureka/"
 ---
 apiVersion: v1
 kind: Service

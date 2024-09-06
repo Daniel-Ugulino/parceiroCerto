@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: task-service
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: task-service
@@ -34,8 +34,12 @@ spec:
               value: guest
             - name: RBPASSWORD
               value: guest
+            - name: RBHOST
+              value: rabbitmq
             - name: DTSOURCE
               value: "/app/data/"
+            - name: EUREKASERVER
+              value: "http://server-registry:8761/eureka/"
 ---
 apiVersion: v1
 kind: Service

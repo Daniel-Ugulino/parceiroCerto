@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: chat-service
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: chat-service
@@ -28,6 +28,16 @@ spec:
               value: postgis
             - name: DBPORT
               value: "5432"
+            - name: RBPORT
+              value: "5672"
+            - name: RBUSER
+              value: guest
+            - name: RBPASSWORD
+              value: guest
+            - name: RBHOST
+              value: rabbitmq
+            - name: EUREKASERVER
+              value: "http://server-registry:8761/eureka/"
 ---
 apiVersion: v1
 kind: Service
