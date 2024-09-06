@@ -17,10 +17,6 @@ public class RouteValidators {
         String requestPath = request.getURI().getPath();
         HttpMethod requestMethod = request.getMethod();
 
-        if (requestMethod == HttpMethod.POST && OPEN_POST_ROUTES.stream().anyMatch(requestPath::startsWith)) {
-            return false;
-        }
-
         return Routes.ROUTES_LIST.stream()
                 .filter(route -> requestPath.matches(route.getPath()))
                 .map(Routes::getEndpointRoles)
@@ -32,8 +28,13 @@ public class RouteValidators {
 
     public boolean isSecured(ServerHttpRequest request) {
         String requestPath = request.getURI().getPath();
-        return Routes.ROUTES_LIST.stream()
-                .map(Routes::getPath)
-                .anyMatch(requestPath::matches);
+        HttpMethod requestMethod = request.getMethod();
+        if (requestMethod == HttpMethod.POST && OPEN_POST_ROUTES.stream().anyMatch(requestPath::startsWith)) {
+            return false;
+        }else{
+            return Routes.ROUTES_LIST.stream()
+                    .map(Routes::getPath)
+                    .anyMatch(requestPath::matches);
+        }
     }
 }
