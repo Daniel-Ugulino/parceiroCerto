@@ -1,4 +1,5 @@
 package com.example.userservice.Service;
+import com.example.userservice.Audit.UserContext;
 import com.example.userservice.Domain.Company;
 import com.example.userservice.Domain.Roles;
 import com.example.userservice.Dto.CompanyDto;
@@ -27,7 +28,8 @@ public class CompanyService {
             BeanUtils.copyProperties(companyDto, companyEntity);
             companyEntity.setRole(Roles.COMPANY);
             companyEntity.setPassword(bCryptPasswordEncoder.encode(companyEntity.getPassword()));
-            companyRepository.save(companyEntity);
+            UserContext.setUserId(companyEntity.getEmail());
+            companyEntity = companyRepository.save(companyEntity);
             return companyEntity;
         }else {
             throw new Exception("CNPJ not valid");

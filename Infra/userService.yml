@@ -26,6 +26,8 @@ spec:
               value: postgis
             - name: DBPORT
               value: "5432"
+            - name: DTSOURCE
+              value: "/app/data/"
           ports:
             - containerPort: 8082
 ---

@@ -1,5 +1,6 @@
 package com.example.userservice.Service;
 
+import com.example.userservice.Audit.UserContext;
 import com.example.userservice.Domain.Freelancer;
 import com.example.userservice.Domain.Roles;
 import com.example.userservice.Dto.FreelancerDto;
@@ -27,8 +28,8 @@ public class FreelancerService {
             BeanUtils.copyProperties(freelancerDto,freelancerEntity);
             freelancerEntity.setRole(Roles.FREELANCER);
             freelancerEntity.setPassword(bCryptPasswordEncoder.encode(freelancerEntity.getPassword()));
-            freelancerRepository.save(freelancerEntity);
-            return freelancerEntity;
+            UserContext.setUserId(freelancerEntity.getEmail());
+            return freelancerRepository.save(freelancerEntity);
         }else {
             throw new Exception("cpf not valid");
         }

@@ -10,6 +10,7 @@ import com.example.userservice.Service.LocationService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.annotation.Order;
@@ -30,14 +31,17 @@ public class HirerLoader implements ApplicationRunner {
     @Autowired
     private HirerRepository hirerRepository;
 
+    @Value("${data.source}")
+    private String source;
+
     @Override
     public void run(ApplicationArguments args) throws Exception {
         if (hirerRepository.count() == 0) {
-            String file = "src/main/java/com/example/userservice/Dataloader/Data/hirer.json";
+            String json = source + "hirer.json";
             ObjectMapper objectMapper = new ObjectMapper();
-            List<Hirer> hirers = objectMapper.readValue(new File(file), objectMapper.getTypeFactory().constructCollectionType(List.class, Hirer.class));
+            List<Hirer> hires = objectMapper.readValue(new File(json), objectMapper.getTypeFactory().constructCollectionType(List.class, Hirer.class));
 
-            for (Hirer hirer : hirers) {
+            for (Hirer hirer : hires) {
                 HirerDto hirerDto = new HirerDto();
                 BeanUtils.copyProperties(hirer, hirerDto, "location");
                 Hirer hirerEntity = hirerService.save(hirerDto);
@@ -45,9 +49,9 @@ public class HirerLoader implements ApplicationRunner {
                     LocationDto locationDto = new LocationDto();
                     BeanUtils.copyProperties(hirer.getLocation(), locationDto);
                     locationService.save(locationDto, hirerEntity.getId());
-                    System.out.println("O Hirer : " + hirer.getEmail() + " foi incluido com sucesso");
                 }
             }
+            System.out.println("Hires Saved");
         }
     }
 }

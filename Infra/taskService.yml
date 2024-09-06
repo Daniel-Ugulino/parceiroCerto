@@ -28,6 +28,14 @@ spec:
               value: postgis
             - name: DBPORT
               value: "5432"
+            - name: RBPORT
+              value: "5672"
+            - name: RBUSER
+              value: guest
+            - name: RBPASSWORD
+              value: guest
+            - name: DTSOURCE
+              value: "/app/data/"
 ---
 apiVersion: v1
 kind: Service

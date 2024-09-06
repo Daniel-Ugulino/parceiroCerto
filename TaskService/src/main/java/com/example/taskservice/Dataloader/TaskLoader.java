@@ -5,6 +5,7 @@ import com.example.taskservice.Repository.TaskRepository;
 import com.example.taskservice.Service.TaskService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.annotation.Order;
@@ -22,16 +23,20 @@ public class TaskLoader implements ApplicationRunner {
     @Autowired
     private TaskRepository taskRepository;
 
+    @Value("${data.source}")
+    private String source;
+
     @Override
     public void run(ApplicationArguments args) throws Exception {
         if (taskRepository.count() == 0) {
-            String file = "src/main/java/com/example/taskservice/Dataloader/Data/task.json";
+            String json = source + "task.json";
             ObjectMapper objectMapper = new ObjectMapper();
-            List<TaskDto> tasks = objectMapper.readValue(new File(file), objectMapper.getTypeFactory().constructCollectionType(List.class, TaskDto.class));
+            List<TaskDto> tasks = objectMapper.readValue(new File(json), objectMapper.getTypeFactory().constructCollectionType(List.class, TaskDto.class));
 
             for (TaskDto taskDto : tasks) {
                 taskService.save(taskDto);
             }
+            System.out.println("Tasks Saved");
         }
     }
 }

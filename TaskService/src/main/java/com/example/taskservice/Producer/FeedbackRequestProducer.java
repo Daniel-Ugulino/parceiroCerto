@@ -16,7 +16,7 @@ public class FeedbackRequestProducer {
 
     public void sendMessage(FeedbackDto feedbackDto) throws JsonProcessingException {
     amqpTemplate.convertAndSend(
-            "feedback-exchange",
+            "parceirtoCerto-exchange",
             "feedback-routing-key",
             objectMapper.writeValueAsString(feedbackDto)
     );

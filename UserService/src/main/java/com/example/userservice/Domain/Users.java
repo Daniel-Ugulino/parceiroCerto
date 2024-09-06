@@ -43,7 +43,6 @@ public class Users {
     @PrePersist
     protected void onCreate() {
         this.createdAt = new Date();
-        UserContext.setUserId(email);
     }
     
     public void reset(Users users){

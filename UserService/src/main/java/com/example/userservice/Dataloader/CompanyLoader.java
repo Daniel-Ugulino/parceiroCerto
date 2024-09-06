@@ -8,6 +8,7 @@ import com.example.userservice.Service.LocationService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.annotation.Order;
@@ -29,12 +30,15 @@ public class CompanyLoader implements ApplicationRunner {
     @Autowired
     private LocationService locationService;
 
+    @Value("${data.source}")
+    private String source;
+
     @Override
     public void run(ApplicationArguments args) throws Exception {
         if(companyRepository.count() == 0) {
-            String file = "src/main/java/com/example/userservice/Dataloader/Data/company.json";
+            String json = source + "company.json";
             ObjectMapper objectMapper = new ObjectMapper();
-            List<Company> companies = objectMapper.readValue(new File(file), objectMapper.getTypeFactory().constructCollectionType(List.class, Company.class));
+            List<Company> companies = objectMapper.readValue(new File(json), objectMapper.getTypeFactory().constructCollectionType(List.class, Company.class));
 
             for (Company company : companies) {
                 CompanyDto companyDto = new CompanyDto();
@@ -44,9 +48,9 @@ public class CompanyLoader implements ApplicationRunner {
                     LocationDto locationDto = new LocationDto();
                     BeanUtils.copyProperties(company.getLocation(), locationDto);
                     locationService.save(locationDto,companyEntity.getId());
-                    System.out.println("A empresa : "+company.getEmail()+" foi incluido com sucesso");
                 }
             }
+            System.out.println("Companies Saved");
         }
     }
 }

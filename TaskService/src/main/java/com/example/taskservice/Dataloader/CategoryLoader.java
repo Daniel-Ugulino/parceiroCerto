@@ -6,6 +6,7 @@ import com.example.taskservice.Service.CategoryService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.annotation.Order;
@@ -23,18 +24,22 @@ public class CategoryLoader implements ApplicationRunner {
     @Autowired
     private CategoryRepository categoryRepository;
 
+    @Value("${data.source}")
+    private String source;
+
     @Override
     public void run(ApplicationArguments args) throws Exception {
         if (categoryRepository.count() == 0) {
-            String file = "src/main/java/com/example/taskservice/Dataloader/Data/category.json";
+            String json = source + "category.json";
             ObjectMapper objectMapper = new ObjectMapper();
-            List<Category> categories = objectMapper.readValue(new File(file), objectMapper.getTypeFactory().constructCollectionType(List.class, Category.class));
+            List<Category> categories = objectMapper.readValue(new File(json), objectMapper.getTypeFactory().constructCollectionType(List.class, Category.class));
 
             for (Category category : categories) {
                 CategoryDto categoryDto = new CategoryDto();
                 BeanUtils.copyProperties(category, categoryDto);
                 categoryService.save(categoryDto);
             }
+            System.out.println("Categories Saved");
         }
     }
 }

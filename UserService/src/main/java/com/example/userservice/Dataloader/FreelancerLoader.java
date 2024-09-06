@@ -10,6 +10,7 @@ import com.example.userservice.Service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.annotation.Order;
@@ -29,13 +30,15 @@ public class FreelancerLoader implements ApplicationRunner {
     @Autowired
     private LocationService locationService;
 
+    @Value("${data.source}")
+    private String source;
+
     @Override
     public void run(ApplicationArguments args) throws Exception {
         if(freelancerRepository.count() == 0) {
-
-            String file = "src/main/java/com/example/userservice/Dataloader/Data/freelancer.json";
+            String json = source + "freelancer.json";
             ObjectMapper objectMapper = new ObjectMapper();
-            List<Freelancer> freelancers = objectMapper.readValue(new File(file), objectMapper.getTypeFactory().constructCollectionType(List.class, Freelancer.class));
+            List<Freelancer> freelancers = objectMapper.readValue(new File(json), objectMapper.getTypeFactory().constructCollectionType(List.class, Freelancer.class));
 
             for (Freelancer freelancer : freelancers) {
                 FreelancerDto freelancerDto = new FreelancerDto();
@@ -45,9 +48,9 @@ public class FreelancerLoader implements ApplicationRunner {
                     LocationDto locationDto = new LocationDto();
                     BeanUtils.copyProperties(freelancer.getLocation(), locationDto);
                     locationService.save(locationDto, freelancerEntity.getId());
-                    System.out.println("O Freelancer : " + freelancer.getEmail() + " foi incluido com sucesso");
                 }
             }
+            System.out.println("Freelancers Saved");
         }
     }
 }
