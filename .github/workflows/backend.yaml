@@ -20,6 +20,11 @@ jobs:
           POSTGRES_DB: parceiroCertoDB
         ports:
           - 5432:5432
+        options: >
+          --health-cmd "pg_isready -U postgres" 
+          --health-interval 10s 
+          --health-timeout 5s 
+          --health-retries 5
 
       rabbitmq:
         image: rabbitmq:3-management
@@ -29,12 +34,23 @@ jobs:
         ports:
           - 5672:5672
           - 15672:15672
+        options: >
+          --health-cmd "curl -f http://localhost:15672/api/v1/health || exit 1" 
+          --health-interval 10s 
+          --health-timeout 5s 
+          --health-retries 5
+
       eureka_server:
         image: danielugulino/serverregistry:latest
         env:
           EUREKA_SERVER_PORT: 8761
         ports:
           - 8761:8761
+        options: >
+          --health-cmd "curl -f http://localhost:8761/eureka/ || exit 1" 
+          --health-interval 10s 
+          --health-timeout 5s 
+          --health-retries 5
 
     steps:
       - name: Checkout code
@@ -52,64 +68,58 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Permissions to maven
-        run: |
-          chmod +x ./ApiGateway/mvnw
-          chmod +x ./AuthService/mvnw
-          chmod +x ./BFF/mvnw
-          chmod +x ./ChatService/mvnw
-          chmod +x ./FeedbackService/mvnw
-          chmod +x ./ServerRegistry/mvnw
-          chmod +x ./TaskService/mvnw
-          chmod +x ./UserService/mvnw
-
-      - name: Make executable .sh files
-        run: |
-          chmod +x ./ApiGateway/build.sh
-          chmod +x ./AuthService/build.sh
-          chmod +x ./BFF/build.sh
-          chmod +x ./ChatService/build.sh
-          chmod +x ./FeedbackService/build.sh
-          chmod +x ./ServerRegistry/build.sh
-          chmod +x ./TaskService/build.sh
-          chmod +x ./UserService/build.sh
-
       - name: Run ApiGateway build
         run: |
           cd ./ApiGateway
+          chmod +x ./mvnw
+          chmod +x ./build.sh
           ./build.sh
 
       - name: Run AuthService build
         run: |
           cd ./AuthService
+          chmod +x ./mvnw
+          chmod +x ./build.sh
           ./build.sh
 
       - name: Run BFF build
         run: |
           cd ./BFF
+          chmod +x ./mvnw
+          chmod +x ./build.sh
           ./build.sh
 
       - name: Run ChatService build
         run: |
           cd ./ChatService
+          chmod +x ./mvnw
+          chmod +x ./build.sh
           ./build.sh
 
       - name: Run FeedbackService build
         run: |
           cd ./FeedbackService
+          chmod +x ./mvnw
+          chmod +x ./build.sh
           ./build.sh
 
       - name: Run ServerRegistry build
         run: |
           cd ./ServerRegistry
+          chmod +x ./mvnw
+          chmod +x ./build.sh
           ./build.sh
 
       - name: Run TaskService build
         run: |
           cd ./TaskService
+          chmod +x ./mvnw
+          chmod +x ./build.sh
           ./build.sh
 
       - name: Run UserService build
         run: |
           cd ./UserService
+          chmod +x ./mvnw
+          chmod +x ./build.sh
           ./build.sh
