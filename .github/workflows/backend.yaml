@@ -53,6 +53,20 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
+      - name: Wait for RabbitMQ to be ready
+        run: |
+          until curl -s http://localhost:15672/api/health/checks/local-alarms | grep -q '"status":"ok"'; do
+            echo "Waiting for RabbitMQ to be ready..."
+            sleep 5
+          done
+
+      - name: Wait for Eureka Server to be ready
+        run: |
+          until curl -s http://localhost:8761 | grep -q "eureka"; do
+            echo "Waiting for Eureka Server to be ready..."
+            sleep 5
+          done
+
       - name: Run ServerRegistry build
         run: |
           cd ./ServerRegistry
@@ -81,20 +95,6 @@ jobs:
           chmod +x ./build.sh
           ./build.sh
 
-      - name: Run ChatService build
-        run: |
-          cd ./ChatService
-          chmod +x ./mvnw
-          chmod +x ./build.sh
-          ./build.sh
-
-      - name: Run FeedbackService build
-        run: |
-          cd ./FeedbackService
-          chmod +x ./mvnw
-          chmod +x ./build.sh
-          ./build.sh
-
       - name: Run TaskService build
         run: |
           cd ./TaskService
@@ -105,6 +105,20 @@ jobs:
       - name: Run UserService build
         run: |
           cd ./UserService
+          chmod +x ./mvnw
+          chmod +x ./build.sh
+          ./build.sh
+
+      - name: Run ChatService build
+        run: |
+          cd ./ChatService
+          chmod +x ./mvnw
+          chmod +x ./build.sh
+          ./build.sh
+
+      - name: Run FeedbackService build
+        run: |
+          cd ./FeedbackService
           chmod +x ./mvnw
           chmod +x ./build.sh
           ./build.sh
