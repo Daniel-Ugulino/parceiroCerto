@@ -74,13 +74,42 @@ jobs:
           chmod +x ./TaskService/build.sh
           chmod +x ./UserService/build.sh
 
-      - name: Run executable .sh files
+      - name: Run ApiGateway build
         run: |
-          ./ApiGateway/build.sh
-          ./AuthService/build.sh
-          ./BFF/build.sh
-          ./ChatService/build.sh
-          ./FeedbackService/build.sh
-          ./ServerRegistry/build.sh
-          ./TaskService/build.sh
-          ./UserService/build.sh
+          cd ./ApiGateway
+          ./build.sh
+
+      - name: Run AuthService build
+        run: |
+          cd ./AuthService
+          ./build.sh
+
+      - name: Run BFF build
+        run: |
+          cd ./BFF
+          ./build.sh
+
+      - name: Run ChatService build
+        run: |
+          cd ./ChatService
+          ./build.sh
+
+      - name: Run FeedbackService build
+        run: |
+          cd ./FeedbackService
+          ./build.sh
+
+      - name: Run ServerRegistry build
+        run: |
+          cd ./ServerRegistry
+          ./build.sh
+
+      - name: Run TaskService build
+        run: |
+          cd ./TaskService
+          ./build.sh
+
+      - name: Run UserService build
+        run: |
+          cd ./UserService
+          ./build.sh
