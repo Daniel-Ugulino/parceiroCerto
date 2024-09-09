@@ -21,7 +21,7 @@ jobs:
         ports:
           - 5432:5432
         options: >
-          --health-cmd "pg_isready -U postgres" 
+          --health-cmd 'pg_isready -U postgres'
           --health-interval 10s 
           --health-timeout 5s 
           --health-retries 5
@@ -35,7 +35,7 @@ jobs:
           - 5672:5672
           - 15672:15672
         options: >
-          --health-cmd "curl -f http://localhost:15672/api/v1/health || exit 1" 
+          --health-cmd 'curl -f http://localhost:15672/api/v1/health || exit 1'
           --health-interval 10s 
           --health-timeout 5s 
           --health-retries 5
@@ -47,7 +47,7 @@ jobs:
         ports:
           - 8761:8761
         options: >
-          --health-cmd "curl -f http://localhost:8761/eureka/ || exit 1" 
+          --health-cmd 'curl -f http://localhost:8761/eureka/ || exit 1' 
           --health-interval 10s 
           --health-timeout 5s 
           --health-retries 5
