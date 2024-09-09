@@ -16,7 +16,7 @@ jobs:
         image: postgis/postgis:16-3.4
         env:
           POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
+          POSTGRES_PASSWORD: ugulino10
           POSTGRES_DB: parceiroCertoDB
         ports:
           - 5432:5432
