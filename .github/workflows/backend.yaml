@@ -52,27 +52,6 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Wait for PostgreSQL to be ready
-        run: |
-          until pg_isready -h localhost -p 5432 -U postgres; do
-            echo "Waiting for PostgreSQL to be ready..."
-            sleep 5
-          done
-
-      - name: Wait for RabbitMQ to be ready
-        run: |
-          until curl -s http://localhost:15672/ | grep -q '"status":"ok"'; do
-            echo "Waiting for RabbitMQ to be ready..."
-            sleep 5
-          done
-
-      - name: Wait for Eureka Server to be ready
-        run: |
-          until curl -s http://localhost:8761/eureka/ | grep -q "eureka"; do
-            echo "Waiting for Eureka Server to be ready..."
-            sleep 5
-          done
-
       - name: Permissions to maven
         run: |
           chmod +x ./ApiGateway/mvnw
