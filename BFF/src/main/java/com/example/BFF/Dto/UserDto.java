@@ -26,7 +26,6 @@ public class UserDto {
         private String gender;
         private Date birthday;
         private Boolean enabled;
-        private LocationDto location;
         private Roles role;
     }
 }

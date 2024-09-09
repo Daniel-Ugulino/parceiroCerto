@@ -34,31 +34,31 @@ public class BFFController {
     UserServiceClient userServiceClient;
 
 
-    @PostMapping("/task")
-    public ResponseEntity<Object> saveTask(@RequestBody @Valid TaskDto taskDto, HttpServletRequest request) {
-        try {
-            Cookie cookie = WebUtils.getCookie(request,"access_token");
-            assert cookie != null;
-            String access_token = cookie.getValue();
-            UserDto userDto = userServiceClient.getUser(taskDto.getUserId());
-            if(userDto.getData() != null) {
-                if(userDto.getData().getRole() == Roles.COMPANY){
-                    taskDto.setProvider(Provider.COMPANY.name());
-                }else if (userDto.getData().getRole() == Roles.FREELANCER){
-                    taskDto.setProvider(Provider.FREELANCER.name());
-                }
-                else{
-                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new CustomResponse<>("User not Allowed to create Task"));
-                }
-                ResponseTaskDto taskResponse =  taskServiceClient.save(taskDto,access_token);
-                return ResponseEntity.status(HttpStatus.OK).body(new CustomResponse<>("Task Saved Successfully",taskResponse.getData()));
-            }
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Internal server error");
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Internal server error");
-        }
-    }
+//    @PostMapping("/task")
+//    public ResponseEntity<Object> saveTask(@RequestBody @Valid TaskDto taskDto, HttpServletRequest request) {
+//        try {
+//            Cookie cookie = WebUtils.getCookie(request,"access_token");
+//            assert cookie != null;
+//            String access_token = cookie.getValue();
+//            UserDto userDto = userServiceClient.getUser(taskDto.getUserId(), access_token);
+//            if(userDto.getData() != null) {
+//                if(userDto.getData().getRole() == Roles.COMPANY){
+//                    taskDto.setProvider(Provider.COMPANY.name());
+//                }else if (userDto.getData().getRole() == Roles.FREELANCER){
+//                    taskDto.setProvider(Provider.FREELANCER.name());
+//                }
+//                else{
+//                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new CustomResponse<>("User not Allowed to create Task"));
+//                }
+//                ResponseTaskDto taskResponse =  taskServiceClient.save(taskDto,access_token);
+//                return ResponseEntity.status(HttpStatus.OK).body(new CustomResponse<>("Task Saved Successfully",taskResponse.getData()));
+//            }
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Internal server error");
+//        } catch (Exception e) {
+//            System.out.println(e.getMessage());
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Internal server error");
+//        }
+//    }
 
     @PostMapping("/request")
     public ResponseEntity<Object> requestTask(@RequestBody @Valid RequestDto requestDto,HttpServletRequest request) {
@@ -66,9 +66,10 @@ public class BFFController {
             Cookie cookie = WebUtils.getCookie(request,"access_token");
             assert cookie != null;
             String access_token = cookie.getValue();
-            UserDto userDto = userServiceClient.getUser(requestDto.getUserId());
+            UserDto userDto = userServiceClient.getUser(requestDto.getUserId(), access_token);
             ResponseTaskDto responseTaskDto = taskServiceClient.getById(requestDto.getTaskId(),access_token);
-            if(userDto.getData() != null && responseTaskDto.getData() != null && responseTaskDto.getData().getEnable()) {
+            System.out.println(responseTaskDto.getData().getTitle());
+            if(userDto.getData() != null && responseTaskDto.getData() != null && responseTaskDto.getData().getActive()) {
                 ResponseRequestDto requestResponse = requestServiceClient.save(requestDto,access_token);
                 requestResponse.getData().setTaskId(requestDto.getTaskId());
                 return ResponseEntity.status(HttpStatus.OK).body(new CustomResponse<>("Request Saved Successfully",requestResponse.getData()));

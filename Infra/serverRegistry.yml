@@ -17,6 +17,9 @@ spec:
           image: danielugulino/serverregistry:latest
           ports:
             - containerPort: 8761
+          env:
+            - name: EUREKAHOST
+              value: server-registry
 ---
 apiVersion: v1
 kind: Service

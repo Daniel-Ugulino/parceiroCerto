@@ -27,4 +27,6 @@ public class TaskResponseDto {
     private Float price;
     @NotBlank
     private Provider providerType;
+    @NotBlank
+    private Boolean active;
 }

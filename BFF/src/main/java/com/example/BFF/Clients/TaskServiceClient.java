@@ -5,11 +5,11 @@ import com.example.BFF.Dto.TaskDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
-@FeignClient(url = "http://localhost:8080/task", name = "taskService")
+@FeignClient(name = "task-service")
 public interface TaskServiceClient {
-    @PostMapping()
+    @PostMapping("/task")
     ResponseTaskDto save(@RequestBody TaskDto taskDto,@RequestHeader("Cookie") String cookies);
 
-    @GetMapping("/{id}")
+    @GetMapping("/task/{id}")
     ResponseTaskDto getById(@PathVariable("id") Long id, @RequestHeader("Cookie") String cookies);
 }
