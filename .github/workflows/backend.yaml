@@ -1,0 +1,83 @@
+name: Backend Build
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgis/postgis
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: parceiroCertoDB
+        ports:
+          - 5432:5432
+      rabbitmq:
+        image: rabbitmq:3-management
+        env:
+          RABBITMQ_DEFAULT_USER: guest
+          RABBITMQ_DEFAULT_PASS: guest
+        ports:
+          - 5672:5672
+          - 15672:15672
+      eureka_server:
+        image: danielugulino/serverregistry:latest
+        env:
+          EUREKA_SERVER_PORT: 8761
+        ports:
+          - 8761:8761
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v3
+      - name: Login in Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Wait for PostgreSQL to be ready
+        run: |
+          until pg_isready -h localhost -p 5432 -U postgres; do
+            echo "Waiting for PostgreSQL to be ready..."
+            sleep 5
+          done
+      - name: Wait for RabbitMQ to be ready
+        run: |
+          until curl -s http://localhost:15672/api/v1/health | grep -q '"status":"ok"'; do
+            echo "Waiting for RabbitMQ to be ready..."
+            sleep 5
+          done
+
+      - name: Wait for Eureka Server to be ready
+        run: |
+          until curl -s http://localhost:8761/eureka/ | grep -q "eureka"; do
+            echo "Waiting for Eureka Server to be ready..."
+            sleep 5
+          done
+      - name: Make executable .sh files
+        uses: |
+          chmod +x ./ApiGateway/build.sh
+          chmod +x ./AuthService/build.sh
+          chmod +x ./BFF/build.sh
+          chmod +x ./ChatService/build.sh
+          chmod +x ./FeedbackService/build.sh
+          chmod +x ./ServerRegistry/build.sh
+          chmod +x ./TaskService/build.sh
+          chmod +x ./UserService/build.sh
+      - name: Run executable .sh files
+        uses: |
+          ./ApiGateway/build.sh
+          ./AuthService/build.sh
+          ./BFF/build.sh
+          ./ChatService/build.sh
+          ./FeedbackService/build.sh
+          ./ServerRegistry/build.sh
+          ./TaskService/build.sh
+          ./UserService/build.sh
