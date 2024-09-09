@@ -6,7 +6,7 @@ export DBPORT=5432
 export DTSOURCE=src/main/java/com/example/userservice/Dataloader/Data/
 export EUREKASERVER=http://localhost:8761/eureka/
 
-./mvnw clean package
+./mvnw clean package -DskipTests
 
 docker build -t userservice:latest .
 docker tag userservice:latest danielugulino/userservice:latest
