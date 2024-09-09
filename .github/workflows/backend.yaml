@@ -20,6 +20,7 @@ jobs:
           POSTGRES_DB: parceiroCertoDB
         ports:
           - 5432:5432
+
       rabbitmq:
         image: rabbitmq:3-management
         env:
@@ -60,7 +61,7 @@ jobs:
 
       - name: Wait for RabbitMQ to be ready
         run: |
-          until curl -s http://localhost:15672/api/v1/health | grep -q '"status":"ok"'; do
+          until curl -s http://localhost:15672/ | grep -q '"status":"ok"'; do
             echo "Waiting for RabbitMQ to be ready..."
             sleep 5
           done
