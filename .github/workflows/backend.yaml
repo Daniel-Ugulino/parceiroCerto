@@ -99,7 +99,8 @@ jobs:
           VM_HOST: ${{ secrets.VM_HOST }}
           VM_USERNAME: ${{ secrets.VM_USERNAME }}
         run: |
-          ssh -o StrictHostKeyChecking=no $VM_USERNAME@$VM_HOST 'mkdir -p /home/parceiroCerto'
+          ssh -o StrictHostKeyChecking=no $VM_USERNAME@$VM_HOST 
+          mkdir -p /home/parceiroCerto
           scp ./ $VM_USERNAME@$VM_HOST:/home/parceiroCerto
 
       - name: Run Kubernets
