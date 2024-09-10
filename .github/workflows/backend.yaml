@@ -101,7 +101,7 @@ jobs:
         run: |
           ssh -o StrictHostKeyChecking=no $VM_USERNAME@$VM_HOST 
           sudo mkdir -p /home/parceiroCerto
-          scp ./ $VM_USERNAME@$VM_HOST:/home/parceiroCerto
+          scp -r ./ $VM_USERNAME@$VM_HOST:/home/parceiroCerto
 
       - name: Run Kubernets
         run: |
