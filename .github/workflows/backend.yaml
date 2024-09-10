@@ -104,6 +104,7 @@ jobs:
             minikube start
             sleep 15
             cd ./Infra
+            chmod +x ./run.sh
             ./run.sh
           EOF
 
