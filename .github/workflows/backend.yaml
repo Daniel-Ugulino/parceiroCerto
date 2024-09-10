@@ -84,6 +84,7 @@ jobs:
           ./build.sh
   deploy:
     runs-on: ubuntu-latest
+    needs: build
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -94,6 +95,7 @@ jobs:
           VM_USERNAME: ${{ secrets.VM_USERNAME }}
           VM_SSH_KEY: ${{ secrets.VM_SSH_KEY }}
         run: |
+          mkdir -p ~/.ssh
           echo "${{ secrets.VM_SSH_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh -o StrictHostKeyChecking=no azure $VM_USERNAME@$VM_HOST 'mkdir -p /home/parceiroCerto'
