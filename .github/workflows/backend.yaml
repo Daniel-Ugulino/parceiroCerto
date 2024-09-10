@@ -98,8 +98,14 @@ jobs:
           VM_HOST: ${{ secrets.VM_HOST }}
           VM_USERNAME: ${{ secrets.VM_USERNAME }}
         run: |
-          ssh -o StrictHostKeyChecking=no $VM_USERNAME@$VM_HOST 'sudo mkdir -p /home/parceiroCerto'
-          rsync -avz --exclude='.git' ./ $VM_USERNAME@$VM_HOST:/home/parceiroCerto/
+          ssh -o StrictHostKeyChecking=no $VM_USERNAME@$VM_HOST << 'EOF'
+            mkdir -p /home/parceiroCerto
+          EOF
+          rsync -avz --exclude='.git' \
+                 --exclude='.PARCEIRO_CERTO_REQUESTS.json.y9KNjF' \
+                 --exclude='.parceirtoCerto.drawio.Aa7N9B' \
+                 ./ $VM_USERNAME@$VM_HOST:/home/parceiroCerto/
+          
 
       - name: Run Kubernets
         env:
