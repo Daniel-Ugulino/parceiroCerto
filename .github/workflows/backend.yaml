@@ -102,6 +102,9 @@ jobs:
           rsync -avz --exclude='.git' ./ $VM_USERNAME@$VM_HOST:/home/parceiroCerto/
 
       - name: Run Kubernets
+        env:
+          VM_HOST: ${{ secrets.VM_HOST }}
+          VM_USERNAME: ${{ secrets.VM_USERNAME }}
         run: |
           ssh -o StrictHostKeyChecking=no $VM_USERNAME@$VM_HOST << 'EOF'
             minikube start
