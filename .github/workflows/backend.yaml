@@ -99,7 +99,7 @@ jobs:
         run: |
           ssh -o StrictHostKeyChecking=no $VM_USERNAME@$VM_HOST << 'EOF'
             ls
-            cd /home/parceiroCerto
+            cd ./parceiroCerto
             git pull
             minikube start
             sleep 15
