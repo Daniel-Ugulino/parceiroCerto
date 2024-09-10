@@ -94,9 +94,11 @@ jobs:
           VM_HOST: ${{ secrets.VM_HOST }}
           VM_USERNAME: ${{ secrets.VM_USERNAME }}
           VM_SSH_KEY: ${{ secrets.VM_SSH_KEY }}
+          VM_SSH_KEY_P: ${{ secrets.VM_SSH_KEY_P }}
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.VM_SSH_KEY }}" > ~/.ssh/id_rsa
+          echo "${{ secrets.VM_SSH_KEY_P }}" > ~/.ssh/id_rsa.pub
           chmod 600 ~/.ssh/id_rsa
           ssh -o StrictHostKeyChecking=no $VM_USERNAME@$VM_HOST 'mkdir -p /home/parceiroCerto'
           scp ./ $VM_USERNAME@$VM_HOST:/home/parceiroCerto
