@@ -84,7 +84,7 @@ jobs:
           ./build.sh
   deploy:
     runs-on: ubuntu-latest
-    needs: build
+#    needs: build
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -94,14 +94,33 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.VM_SSH_KEY_P }}
 
+      - name: Copy Code to VM
+        env:
+          VM_HOST: ${{ secrets.VM_HOST }}
+          VM_USERNAME: ${{ secrets.VM_USERNAME }}
+        run: |
+          ssh -o StrictHostKeyChecking=no $VM_USERNAME@$VM_HOST 
+          if [ -d "$DIRECTORY" ]; then
+              echo "Directory $DIRECTORY exists. Pulling latest changes."
+              cd $DIRECTORY
+              sudo git pull
+            else
+              echo "Directory $DIRECTORY does not exist. Cloning repository."
+                    sudo mkdir -p /home/parceiroCerto
+
+              sudo git clone https://github.com/Daniel-Ugulino/parceiroCerto.git $DIRECTORY
+            fi
+          scp ./ $VM_USERNAME@$VM_HOST:/home/parceiroCerto
+
       - name: Run Kubernets
         run: |
-          ssh -o StrictHostKeyChecking=no $VM_USERNAME@$VM_HOST
+          ssh -o StrictHostKeyChecking=no $VM_USERNAME@$VM_HOST 
           minikube start
-          sleep 20
+          sleep 15
           kubectl delete all --all
-          cd ./parceiroCerto/Infra
+          cd ./parceiroCerto
           git pull
+          cd ./Infra
           run.sh
           
       
