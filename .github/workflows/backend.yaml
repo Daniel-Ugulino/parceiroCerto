@@ -102,6 +102,7 @@ jobs:
           ssh -o StrictHostKeyChecking=no $VM_USERNAME@$VM_HOST 
           minikube start
           sleep 15
+          ls
           cd ./parceiroCerto
           git pull
           cd ./Infra
