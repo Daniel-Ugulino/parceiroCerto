@@ -99,9 +99,18 @@ jobs:
           VM_HOST: ${{ secrets.VM_HOST }}
           VM_USERNAME: ${{ secrets.VM_USERNAME }}
         run: |
-          ssh -o StrictHostKeyChecking=no $VM_USERNAME@$VM_HOST 
-          sudo mkdir -p /home/parceiroCerto
-          scp -r ./ $VM_USERNAME@$VM_HOST:/home/parceiroCerto
+          ssh -o StrictHostKeyChecking=no $VM_USERNAME@$VM_HOST << 'EOF'
+            DIRECTORY="/home/parceiroCerto"
+          
+            if [ -d "$DIRECTORY" ]; then
+              echo "Directory $DIRECTORY exists. Pulling latest changes."
+              cd $DIRECTORY
+              git pull
+            else
+              echo "Directory $DIRECTORY does not exist. Cloning repository."
+              git clone https://github.com/Daniel-Ugulino/parceiroCerto.git $DIRECTORY
+            fi
+          EOF
 
       - name: Run Kubernets
         run: |
