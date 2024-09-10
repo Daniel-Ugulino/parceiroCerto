@@ -105,10 +105,10 @@ jobs:
             if [ -d "$DIRECTORY" ]; then
               echo "Directory $DIRECTORY exists. Pulling latest changes."
               cd $DIRECTORY
-              git pull
+              sudo git pull
             else
               echo "Directory $DIRECTORY does not exist. Cloning repository."
-              git clone https://github.com/Daniel-Ugulino/parceiroCerto.git $DIRECTORY
+              sudo git clone https://github.com/Daniel-Ugulino/parceiroCerto.git $DIRECTORY
             fi
           EOF
 
