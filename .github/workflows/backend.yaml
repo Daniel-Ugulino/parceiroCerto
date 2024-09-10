@@ -98,7 +98,7 @@ jobs:
           mkdir -p ~/.ssh
           echo "${{ secrets.VM_SSH_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          ssh -o StrictHostKeyChecking=no azure $VM_USERNAME@$VM_HOST 'mkdir -p /home/parceiroCerto'
+          ssh -o StrictHostKeyChecking=no $VM_USERNAME@$VM_HOST 'mkdir -p /home/parceiroCerto'
           scp ./ $VM_USERNAME@$VM_HOST:/home/parceiroCerto
 
       - name: Run Kubernets
