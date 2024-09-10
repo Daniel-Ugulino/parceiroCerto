@@ -96,7 +96,7 @@ jobs:
 
       - name: Run Kubernets
         run: |
-          ssh -o StrictHostKeyChecking=no $VM_USERNAME@$VM_HOST 
+          ssh $VM_USERNAME@$VM_HOST 
           minikube start
           sleep 15
           kubectl delete all --all
