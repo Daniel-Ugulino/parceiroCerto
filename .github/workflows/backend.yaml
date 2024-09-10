@@ -84,7 +84,7 @@ jobs:
 #          ./build.sh
   deploy:
     runs-on: ubuntu-latest
-#    needs: build
+    needs: build
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -93,22 +93,21 @@ jobs:
         uses: webfactory/ssh-agent@v0.9.0
         with:
           ssh-private-key: ${{ secrets.VM_SSH_KEY_P }}
-
-      - name: Run Kubernetes
+      - name: Run Kubernets
         env:
           VM_HOST: ${{ secrets.VM_HOST }}
           VM_USERNAME: ${{ secrets.VM_USERNAME }}
         run: |
-          ssh $VM_USERNAME@$VM_HOST << 'EOF'
+          ssh -o StrictHostKeyChecking=no $VM_USERNAME@$VM_HOST << 'EOF'
             ls
-            cd ./parceiroCerto
+            cd /home/parceiroCerto
             git pull
             minikube start
             sleep 15
             cd ./Infra
             ./run.sh
           EOF
-         
 
+          
       
         
