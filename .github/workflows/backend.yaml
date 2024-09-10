@@ -102,7 +102,6 @@ jobs:
           ssh -o StrictHostKeyChecking=no $VM_USERNAME@$VM_HOST 
           minikube start
           sleep 15
-          kubectl delete all --all
           cd ./parceiroCerto
           git pull
           cd ./Infra
