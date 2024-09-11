@@ -62,6 +62,13 @@ jobs:
           chmod +x ./build.sh
           ./build.sh
 
+      - name: Run RequestService build
+        run: |
+          cd ./RequestService
+          chmod +x ./mvnw
+          chmod +x ./build.sh
+          ./build.sh
+
       - name: Run UserService build
         run: |
           cd ./UserService
