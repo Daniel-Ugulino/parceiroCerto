@@ -1,0 +1,128 @@
+[
+  {
+    "description": "Start system development",
+    "userId": 11,
+    "taskId": 1,
+    "amount": 3,
+    "notes": "Complete development of the system",
+    "totalPrice": 36000.00,
+    "providerId": 1
+  },
+  {
+    "description": "Initial environmental consulting",
+    "userId": 12,
+    "taskId": 2,
+    "amount": 1,
+    "notes": "Implementation of sustainable practices",
+    "totalPrice": 8000.00,
+    "providerId": 2
+  },
+  {
+    "description": "Complete check-up",
+    "userId": 13,
+    "taskId": 3,
+    "amount": 1,
+    "notes": "Exams and medical follow-up",
+    "totalPrice": 5000.00,
+    "providerId": 3
+  },
+  {
+    "description": "Educational training",
+    "userId": 14,
+    "taskId": 4,
+    "amount": 2,
+    "notes": "Training in innovative teaching techniques",
+    "totalPrice": 7000.00,
+    "providerId": 4
+  },
+  {
+    "description": "Automobile maintenance",
+    "userId": 15,
+    "taskId": 5,
+    "amount": 1,
+    "notes": "Complete service and parts replacement",
+    "totalPrice": 1500.00,
+    "providerId": 5
+  },
+  {
+    "description": "Plumbing services",
+    "userId": 11,
+    "taskId": 6,
+    "amount": 1,
+    "notes": "Installation and repair of plumbing systems",
+    "totalPrice": 2000.00,
+    "providerId": 6
+  },
+  {
+    "description": "Electrical services",
+    "userId": 12,
+    "taskId": 7,
+    "amount": 2,
+    "notes": "Residential electrical repairs and installations",
+    "totalPrice": 3600.00,
+    "providerId": 7
+  },
+  {
+    "description": "Garden maintenance",
+    "userId": 13,
+    "taskId": 8,
+    "amount": 1,
+    "notes": "Care and beautification of gardens",
+    "totalPrice": 1200.00,
+    "providerId": 8
+  },
+  {
+    "description": "Post-construction cleaning",
+    "userId": 14,
+    "taskId": 9,
+    "amount": 1,
+    "notes": "Complete cleaning after renovation",
+    "totalPrice": 1000.00,
+    "providerId": 9
+  },
+  {
+    "description": "Custom carpentry",
+    "userId": 15,
+    "taskId": 10,
+    "amount": 3,
+    "notes": "Creation of custom-made furniture",
+    "totalPrice": 10500.00,
+    "providerId": 10
+  },
+  {
+    "description": "Legal consulting",
+    "userId": 11,
+    "taskId": 11,
+    "amount": 1,
+    "notes": "Consulting on contracts and legal matters",
+    "totalPrice": 10000.00,
+    "providerId": 1
+  },
+  {
+    "description": "Irrigation system installation",
+    "userId": 12,
+    "taskId": 12,
+    "amount": 1,
+    "notes": "Installation and maintenance of irrigation systems",
+    "totalPrice": 4000.00,
+    "providerId": 8
+  },
+  {
+    "description": "Professional photography",
+    "userId": 13,
+    "taskId": 13,
+    "amount": 2,
+    "notes": "Photography services for events and products",
+    "totalPrice": 5000.00,
+    "providerId": 3
+  },
+  {
+    "description": "Digital marketing consulting",
+    "userId": 14,
+    "taskId": 14,
+    "amount": 3,
+    "notes": "Digital marketing strategies for businesses",
+    "totalPrice": 3300.00,
+    "providerId": 2
+  }
+]

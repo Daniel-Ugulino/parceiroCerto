@@ -21,7 +21,10 @@ echo 'RUNNING userService '
 sleep 40
 kubectl apply -f taskService.yml
 echo 'RUNNING taskService '
-sleep 40
+sleep 30
+kubectl apply -f requestService.yml
+echo 'RUNNING requestService '
+sleep 30
 kubectl apply -f chatService.yml
 echo 'RUNNING chatService '
 sleep 10
