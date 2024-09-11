@@ -33,8 +33,5 @@ public class Task {
     @Enumerated(EnumType.STRING)
     private Provider providerType;
 
-    @OneToMany(mappedBy = "task", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Request> requests;
-
     private Boolean active = true;
 }

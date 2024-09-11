@@ -18,7 +18,7 @@ public class ResponseTaskDto {
             private String description;
             private Long userId;
             private CategoryDto category;
-            private Double price;
+            private Float price;
             private Boolean active;
     }
 }

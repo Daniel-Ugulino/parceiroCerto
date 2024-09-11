@@ -19,6 +19,8 @@ public class RequestDto {
     private Long userId;
     @NotNull
     private Long taskId;
+    private Long providerId;
+    private Float totalPrice;
     @NotNull
     private Integer amount;
     @NotBlank

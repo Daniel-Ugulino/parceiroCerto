@@ -1,7 +1,5 @@
-package com.example.taskservice.Domain;
-
-import com.example.taskservice.Domain.Enum.RequestStatus;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+package com.example.requestservice.Domain;
+import com.example.requestservice.Domain.Enum.RequestStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -30,20 +28,6 @@ public class Request {
     private RequestStatus status = RequestStatus.CREATED;
     private Integer amount;
     private Float totalPrice;
+    private Long taskId;
 
-    @ManyToOne
-    @JsonIgnore
-    @JoinColumn(name = "task_id")
-    private Task task;
-
-    @PrePersist
-    @PreUpdate
-    public void calculateTotalPrice() {
-        if (this.task != null && this.amount != null && this.task.getPrice() != null) {
-            this.totalPrice = this.amount * this.task.getPrice();
-        }
-        else {
-            this.totalPrice = 0F;
-        }
-    }
 }

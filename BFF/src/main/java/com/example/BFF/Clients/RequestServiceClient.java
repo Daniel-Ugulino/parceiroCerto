@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 
-@FeignClient(name = "task-service")
+@FeignClient(name = "request-service")
 public interface RequestServiceClient {
     @PostMapping("/request")
     ResponseRequestDto save(@RequestBody RequestDto requestDto, @RequestHeader("Cookie") String cookies);

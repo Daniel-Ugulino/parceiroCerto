@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: task-service
+  name: request-service
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: task-service
+      app: request-service
   template:
     metadata:
       labels:
-        app: task-service
+        app: request-service
     spec:
       containers:
-        - name: task-service
-          image: danielugulino/taskservice:latest
+        - name: request-service
+          image: danielugulino/requestservice:latest
           ports:
             - containerPort: 8083
           env:
@@ -28,6 +28,14 @@ spec:
               value: postgis
             - name: DBPORT
               value: "5432"
+            - name: RBPORT
+              value: "5672"
+            - name: RBUSER
+              value: guest
+            - name: RBPASSWORD
+              value: guest
+            - name: RBHOST
+              value: rabbitmq
             - name: DTSOURCE
               value: "/app/data/"
             - name: EUREKASERVER
@@ -36,11 +44,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: task-service
+  name: request-service
 spec:
   type: ClusterIP
   selector:
-    app: task-service
+    app: request-service
   ports:
-    - port: 8083
-      targetPort: 8083
+    - port: 8087
+      targetPort: 8087
