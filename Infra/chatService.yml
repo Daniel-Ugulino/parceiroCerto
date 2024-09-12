@@ -38,6 +38,8 @@ spec:
               value: rabbitmq
             - name: EUREKASERVER
               value: "http://server-registry:8761/eureka/"
+            - name: ZPENDPOINT
+              value: "http://zipkin:9411/api/v2/spans"
 ---
 apiVersion: v1
 kind: Service

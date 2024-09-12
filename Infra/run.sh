@@ -4,6 +4,9 @@ sleep 30
 kubectl apply -f rabbitMq.yml
 echo 'RUNNING rabbitMq '
 sleep 10
+kubectl apply -f zipkin.yml
+echo 'RUNNING zipkin '
+sleep 10
 kubectl apply -f serverRegistry.yml
 echo 'RUNNING serverRegistry '
 sleep 10

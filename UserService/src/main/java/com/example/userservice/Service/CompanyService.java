@@ -6,6 +6,7 @@ import com.example.userservice.Dto.CompanyDto;
 import com.example.userservice.Dto.CompanyUpdateDto;
 import com.example.userservice.Repository.CompanyRepository;
 import com.example.userservice.Utils.ValidateCpfCnpj;
+import io.micrometer.observation.annotation.Observed;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -21,7 +22,7 @@ public class CompanyService {
     @Autowired
     private CompanyRepository companyRepository;
 
-
+    @Observed(name = "Company save")
     public Company save(CompanyDto companyDto) throws Exception{
         Company companyEntity = new Company();
         if(ValidateCpfCnpj.validateCNPJ(companyDto.getCnpj())) {
