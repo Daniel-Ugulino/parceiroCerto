@@ -15,6 +15,7 @@ spec:
       containers:
         - name: server-registry
           image: danielugulino/serverregistry:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 8761
           env:

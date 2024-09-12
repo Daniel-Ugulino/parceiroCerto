@@ -15,6 +15,7 @@ spec:
       containers:
         - name: user-service
           image: danielugulino/userservice:latest
+          imagePullPolicy: Always
           env:
             - name: DBSOURCE
               value: parceiroCertoDB

@@ -15,6 +15,7 @@ spec:
       containers:
         - name: postgis
           image: postgis/postgis
+          imagePullPolicy: Always
           env:
             - name: POSTGRES_DB
               value: parceiroCertoDB

@@ -15,6 +15,7 @@ spec:
       containers:
         - name: auth-service
           image: danielugulino/authservice:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 8089
           env:

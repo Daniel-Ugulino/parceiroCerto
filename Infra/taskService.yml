@@ -15,6 +15,7 @@ spec:
       containers:
         - name: task-service
           image: danielugulino/taskservice:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 8083
           env:
