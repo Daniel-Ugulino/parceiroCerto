@@ -66,7 +66,7 @@ class FeedbackServiceTest {
         when(feedbackRepository.findById(1L)).thenReturn(Optional.of(feedback));
         doNothing().when(feedbackRepository).deleteById(1L);
         feedbackService.delete(1L);
-        verify(feedbackRepository, times(1)).findById(1L);t
+        verify(feedbackRepository, times(1)).findById(1L);
         verify(feedbackRepository, times(1)).deleteById(1L);
     }
 }
