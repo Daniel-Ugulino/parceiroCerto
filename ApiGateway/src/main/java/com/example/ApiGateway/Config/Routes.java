@@ -20,7 +20,7 @@ public class Routes {
     static {
             ROUTES_LIST = List.of(
                     new Routes() {{
-                        setPath("/users/*");
+                        setPath("/users");
                         setEndpointRoles(Map.of(
                                 HttpMethod.GET, List.of("HIRER", "COMPANY", "FREELANCER"),
                                 HttpMethod.PUT, List.of("HIRER", "COMPANY", "FREELANCER"),
@@ -28,7 +28,7 @@ public class Routes {
                         ));
                     }},
                 new Routes() {{
-                    setPath("/hirer/*");
+                    setPath("/hirer");
                     setEndpointRoles(Map.of(
                             HttpMethod.GET, List.of("HIRER", "COMPANY", "FREELANCER"),
                             HttpMethod.PUT, List.of("HIRER"),
@@ -36,7 +36,7 @@ public class Routes {
                     ));
                 }},
                 new Routes() {{
-                    setPath("/company/*");
+                    setPath("/company");
                     setEndpointRoles(Map.of(
                             HttpMethod.GET, List.of("HIRER", "COMPANY", "FREELANCER"),
                             HttpMethod.PUT, List.of("COMPANY"),
@@ -44,7 +44,7 @@ public class Routes {
                     ));
                 }},
                 new Routes() {{
-                    setPath("/freelancer/*");
+                    setPath("/freelancer");
                     setEndpointRoles(Map.of(
                             HttpMethod.GET, List.of("HIRER", "COMPANY", "FREELANCER"),
                             HttpMethod.PUT, List.of("FREELANCER"),
@@ -52,7 +52,7 @@ public class Routes {
                     ));
                 }},
                 new Routes() {{
-                    setPath("/task/*");
+                    setPath("/task");
                     setEndpointRoles(Map.of(
                             HttpMethod.POST, List.of("COMPANY", "FREELANCER"),
                             HttpMethod.GET, List.of("HIRER", "COMPANY", "FREELANCER"),
@@ -61,7 +61,7 @@ public class Routes {
                     ));
                 }},
                 new Routes() {{
-                    setPath("/request/*");
+                    setPath("/request");
                     setEndpointRoles(Map.of(
                             HttpMethod.POST, List.of("HIRER"),
                             HttpMethod.GET, List.of("HIRER", "COMPANY", "FREELANCER"),
@@ -70,7 +70,7 @@ public class Routes {
                     ));
                 }},
                 new Routes() {{
-                    setPath("/category/*");
+                    setPath("/category");
                     setEndpointRoles(Map.of(
                             HttpMethod.GET, List.of("HIRER", "COMPANY", "FREELANCER"),
                             HttpMethod.POST, List.of("HIRER", "COMPANY", "FREELANCER")
@@ -83,14 +83,14 @@ public class Routes {
                     ));
                 }},
                 new Routes() {{
-                    setPath("/message/*");
+                    setPath("/message");
                     setEndpointRoles(Map.of(
                             HttpMethod.POST, List.of("HIRER", "COMPANY", "FREELANCER"),
                             HttpMethod.GET, List.of("HIRER", "COMPANY", "FREELANCER")
                     ));
                 }},
                 new Routes() {{
-                    setPath("/feedback/*");
+                    setPath("/feedback");
                     setEndpointRoles(Map.of(
                             HttpMethod.POST, List.of("HIRER"),
                             HttpMethod.GET, List.of("HIRER", "COMPANY", "FREELANCER")
@@ -104,12 +104,6 @@ public class Routes {
                 }},
                 new Routes() {{
                     setPath("/bff/request");
-                    setEndpointRoles(Map.of(
-                            HttpMethod.POST, List.of("HIRER")
-                    ));
-                }},
-                new Routes() {{
-                    setPath("/bff/feedback");
                     setEndpointRoles(Map.of(
                             HttpMethod.POST, List.of("HIRER")
                     ));
