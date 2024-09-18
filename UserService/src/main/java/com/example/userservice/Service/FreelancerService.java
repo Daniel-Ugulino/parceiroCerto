@@ -55,6 +55,8 @@ public class FreelancerService {
             BeanUtils.copyProperties(freelancerDto,freelancerEntity,"cpf","expertise");
             Freelancer storedFreelancer = optionalFreelancer.get();
             freelancerEntity.reset(storedFreelancer);
+            freelancerEntity.setCpf(storedFreelancer.getCpf());
+            freelancerEntity.setExpertise(storedFreelancer.getExpertise());
             freelancerRepository.save(freelancerEntity);
             return freelancerEntity;
         } else {

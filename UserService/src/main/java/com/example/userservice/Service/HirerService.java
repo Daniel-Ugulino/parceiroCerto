@@ -57,6 +57,7 @@ public class HirerService {
             BeanUtils.copyProperties(hirerDto,hirerEntity,"cpf");
             Hirer storedHirer = optionalHirer.get();
             hirerEntity.reset(storedHirer);
+            hirerEntity.setCpf(storedHirer.getCpf());
             hirerRepository.save(hirerEntity);
             return hirerEntity;
         } else {

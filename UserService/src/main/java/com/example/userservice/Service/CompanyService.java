@@ -57,6 +57,8 @@ public class CompanyService {
             BeanUtils.copyProperties(companyDto, companyEntity,"cnpj","expertise");
             Company storedCompany = optionalCompany.get();
             companyEntity.reset(storedCompany);
+            companyEntity.setCnpj(storedCompany.getCnpj());
+            companyEntity.setExpertise(storedCompany.getExpertise());
             companyRepository.save(companyEntity);
             return companyEntity;
         } else {
