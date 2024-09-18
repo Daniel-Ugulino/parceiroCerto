@@ -66,7 +66,7 @@ public class LocationController {
     public ResponseEntity<Object> update(@RequestBody @Valid LocationDto locationDto, @PathVariable Long id) {
         try {
             Location locationEntity = locationService.update(locationDto,id);
-            return ResponseEntity.status(HttpStatus.OK).body(new CustomResponse<>("Password reset successfully",locationEntity));
+            return ResponseEntity.status(HttpStatus.OK).body(new CustomResponse<>("Location Updated",locationEntity));
         } catch (DataIntegrityViolationException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new CustomResponse<>("Data integrity violation"));
         } catch (Exception e) {

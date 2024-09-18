@@ -52,6 +52,7 @@ public class Users {
         this.setEnabled(users.getEnabled());
         this.setCreatedAt(users.getCreatedAt());
         this.setEmail(users.getEmail());
+        this.setLocation(users.getLocation());
     }
 
 }

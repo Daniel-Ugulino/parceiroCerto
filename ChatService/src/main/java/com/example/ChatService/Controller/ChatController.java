@@ -32,7 +32,7 @@ public class ChatController {
         }
     }
 
-    @GetMapping("/task/{id}")
+    @GetMapping("/request/{id}")
     public ResponseEntity<Object> getByRequestId(@PathVariable Long id) {
         try {
             Chat chat = chatService.getByOrderId(id);
