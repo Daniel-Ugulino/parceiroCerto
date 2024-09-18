@@ -19,7 +19,7 @@ public class TaskUpdateDto {
     @NotBlank
     private String description;
     @NotNull
-    private Category category;
+    private Long categoryId;
     @NotNull
     private Float price;
 }

@@ -69,10 +69,16 @@ public class TaskService {
     public Task update(TaskUpdateDto taskDto, Long id) throws Exception{
         Optional<Task> task = taskRepository.findById(id);
         if(task.isPresent()){
-            Task storedTask = task.get();
-            BeanUtils.copyProperties(taskDto, storedTask, "id", "requests");
-            taskRepository.save(storedTask);
-            return storedTask;
+            Optional<Category> categoryOptional = categoryRepository.findById(taskDto.getCategoryId());
+            if(categoryOptional.isPresent()){
+                Task storedTask = task.get();
+                BeanUtils.copyProperties(taskDto, storedTask, "id", "requests");
+                storedTask.setCategory(categoryOptional.get());
+                taskRepository.save(storedTask);
+                return storedTask;
+            }else {
+                throw new Exception("Category not found");
+            }
         }else {
             throw new Exception("Task not found");
         }
