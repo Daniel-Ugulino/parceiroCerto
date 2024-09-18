@@ -17,15 +17,8 @@ public class CompanyUpdateDto extends UserUpdateDto{
     private String socialName;
 
     @NotBlank
-    @Pattern(regexp = "^\\d{2}\\.\\d{3}\\.\\d{3}/\\d{4}-\\d{2}$", message = "CNPJ is not valid")
-    private String cnpj;
-
-    @NotBlank
     private String description;
 
     @NotBlank
     private String professionalField;
-
-    @NotNull
-    private List<String> expertise;
 }

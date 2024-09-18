@@ -18,15 +18,15 @@ public class Routes {
 
     public static final List<Routes> ROUTES_LIST;
     static {
-        ROUTES_LIST = List.of(
-                new Routes() {{
-                    setPath("/users/*");
-                    setEndpointRoles(Map.of(
-                            HttpMethod.GET, List.of("HIRER", "COMPANY", "FREELANCER"),
-                            HttpMethod.PUT, List.of("HIRER", "COMPANY", "FREELANCER"),
-                            HttpMethod.DELETE, List.of("HIRER", "COMPANY", "FREELANCER")
-                    ));
-                }},
+            ROUTES_LIST = List.of(
+                    new Routes() {{
+                        setPath("/users/*");
+                        setEndpointRoles(Map.of(
+                                HttpMethod.GET, List.of("HIRER", "COMPANY", "FREELANCER"),
+                                HttpMethod.PUT, List.of("HIRER", "COMPANY", "FREELANCER"),
+                                HttpMethod.DELETE, List.of("HIRER", "COMPANY", "FREELANCER")
+                        ));
+                    }},
                 new Routes() {{
                     setPath("/hirer/*");
                     setEndpointRoles(Map.of(

@@ -18,7 +18,7 @@ public class RouteValidators {
         HttpMethod requestMethod = request.getMethod();
 
         return Routes.ROUTES_LIST.stream()
-                .filter(route -> requestPath.matches(route.getPath()))
+                .filter(route -> requestPath.matches(route.getPath().replace("*", ".*")))
                 .map(Routes::getEndpointRoles)
                 .filter(endpointRoles -> endpointRoles.containsKey(requestMethod))
                 .map(endpointRoles -> endpointRoles.get(requestMethod))
@@ -33,8 +33,7 @@ public class RouteValidators {
             return false;
         }else{
             return Routes.ROUTES_LIST.stream()
-                    .map(Routes::getPath)
-                    .anyMatch(requestPath::matches);
+                .anyMatch(route -> requestPath.matches(route.getPath().replace("*", ".*")));
         }
     }
 }

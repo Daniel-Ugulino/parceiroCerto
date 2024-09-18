@@ -52,7 +52,7 @@ public class FreelancerService {
         Optional<Freelancer> optionalFreelancer = freelancerRepository.findById(id);
         if (optionalFreelancer.isPresent()) {
             Freelancer freelancerEntity = new Freelancer();
-            BeanUtils.copyProperties(freelancerDto,freelancerEntity);
+            BeanUtils.copyProperties(freelancerDto,freelancerEntity,"cpf","expertise");
             Freelancer storedFreelancer = optionalFreelancer.get();
             freelancerEntity.reset(storedFreelancer);
             freelancerRepository.save(freelancerEntity);

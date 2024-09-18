@@ -16,8 +16,4 @@ import java.util.List;
 public class FreelancerUpdateDto extends UserUpdateDto {
     @NotBlank
     private String description;
-
-    @NotBlank
-    @Pattern(regexp = "^\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}$", message = "CPF is not valid")
-    private String cpf;
 }

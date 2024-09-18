@@ -54,7 +54,7 @@ public class CompanyService {
         Optional<Company> optionalCompany = companyRepository.findById(id);
         if (optionalCompany.isPresent()) {
             Company companyEntity = new Company();
-            BeanUtils.copyProperties(companyDto, companyEntity);
+            BeanUtils.copyProperties(companyDto, companyEntity,"cnpj","expertise");
             Company storedCompany = optionalCompany.get();
             companyEntity.reset(storedCompany);
             companyRepository.save(companyEntity);

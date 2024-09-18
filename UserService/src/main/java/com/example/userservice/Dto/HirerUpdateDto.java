@@ -10,8 +10,5 @@ import jakarta.validation.constraints.Pattern;
 @Setter
 @NoArgsConstructor
 public class HirerUpdateDto extends UserUpdateDto {
-    @NotBlank
-    @Pattern(regexp = "^\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}$", message = "CPF is not valid")
 
-    private String cpf;
 }

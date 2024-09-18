@@ -1,3 +1,5 @@
+kubectl delete all --all
+sleep 15
 kubectl apply -f postgis.yml
 echo 'RUNNING postgis '
 sleep 30
@@ -32,5 +34,10 @@ kubectl apply -f chatService.yml
 echo 'RUNNING chatService '
 sleep 10
 kubectl apply -f apiGateway.yml
-echo 'running apiGateway '
+echo 'RUNNING apiGateway '
 sleep 20
+echo 'RUNNING Port-Fowards'
+kubectl port-forward deployment/api-gateway 8080:8080 & \
+kubectl port-forward deployment/rabbitMq 15672:15672 & \
+kubectl port-forward deployment/serverRegistry 8761:8761 & \
+kubectl port-forward deployment/postgis 5432:5432

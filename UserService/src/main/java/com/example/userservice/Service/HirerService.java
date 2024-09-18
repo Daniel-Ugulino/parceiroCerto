@@ -54,7 +54,7 @@ public class HirerService {
         Optional<Hirer> optionalHirer = hirerRepository.findById(id);
         if (optionalHirer.isPresent()) {
             Hirer hirerEntity = new Hirer();
-            BeanUtils.copyProperties(hirerDto,hirerEntity);
+            BeanUtils.copyProperties(hirerDto,hirerEntity,"cpf");
             Hirer storedHirer = optionalHirer.get();
             hirerEntity.reset(storedHirer);
             hirerRepository.save(hirerEntity);
