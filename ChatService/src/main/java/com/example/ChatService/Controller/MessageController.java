@@ -1,6 +1,5 @@
 package com.example.ChatService.Controller;
 
-import com.example.ChatService.Domain.Message;
 import com.example.ChatService.Dto.MessageDto;
 import com.example.ChatService.Service.MessageService;
 import com.example.ChatService.Utils.CustomResponse;
@@ -21,7 +20,7 @@ public class MessageController {
     @PostMapping()
     public ResponseEntity<Object> sendMessage(MessageDto messageDto){
         try {
-            Message messageEntity = messageService.save(messageDto);
+            MessageDto messageEntity = messageService.save(messageDto);
             return ResponseEntity.status(HttpStatus.OK).body(new CustomResponse<>("Message Sent Successfully",messageEntity));
         } catch (DataIntegrityViolationException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new CustomResponse<>("Data integrity violation"));
