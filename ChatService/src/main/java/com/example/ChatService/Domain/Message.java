@@ -33,6 +33,6 @@ public class Message {
     @PrePersist
     protected void onCreate() {
         this.createdAt = new Date();
-        UserContext.setUserId(this.getSender().toString());
+        UserContext.setUserId(this.getSender());
     }
 }

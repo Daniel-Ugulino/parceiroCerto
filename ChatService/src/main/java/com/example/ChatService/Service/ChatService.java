@@ -16,13 +16,12 @@ public class ChatService {
     @Autowired
     private ChatRepositoy chatRepositoy;
 
-    public Chat save(ChatDto chatDto){
+    public void save(ChatDto chatDto){
         Chat chat = new Chat();
         chat.addUser(chatDto.getHirerId());
         chat.addUser(chatDto.getProviderId());
         chat.setRequestId(chatDto.getRequestId());
         chatRepositoy.save(chat);
-        return chat;
     }
 
     public Chat getById(Long id){

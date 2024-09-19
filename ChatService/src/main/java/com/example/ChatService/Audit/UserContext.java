@@ -1,14 +1,14 @@
 package com.example.ChatService.Audit;
 
 public class UserContext {
-    private static final ThreadLocal<String> context = new ThreadLocal<>();
+    private static final ThreadLocal<Long> context = new ThreadLocal<>();
 
-    public static void setUserId(String userEmail) {
+    public static void setUserId(Long id) {
         clear();
-        context.set(userEmail);
+        context.set(id);
     }
 
-    static String getUserId() {
+    static Long getUserId() {
         return context.get();
     }
 

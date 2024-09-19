@@ -43,6 +43,6 @@ public class Chat {
 
     @PrePersist
     protected void onCreate() {
-        UserContext.setUserId(this.users.get(0).toString());
+        UserContext.setUserId(this.users.get(0));
     }
 }
