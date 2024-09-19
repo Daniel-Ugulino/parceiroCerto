@@ -92,7 +92,7 @@ public class Routes {
                 new Routes() {{
                     setPath("/feedback");
                     setEndpointRoles(Map.of(
-                            HttpMethod.POST, List.of("HIRER"),
+                            HttpMethod.PUT, List.of("HIRER"),
                             HttpMethod.GET, List.of("HIRER", "COMPANY", "FREELANCER")
                     ));
                 }},
