@@ -23,13 +23,18 @@ public class MessageService {
         System.out.println(messageDto.getChatId());
         Optional<Chat> chat = chatRepositoy.findById(messageDto.getChatId());
         if(chat.isPresent()) {
-            Message message = new Message();
-            message.setSender(Long.valueOf(UserContext.getUserId()));
-            message.setChat(chat.get());
-            message.setContent(messageDto.getContent());
-            messageRepository.save(message);
-            messageDto.setCreatedAt(message.getCreatedAt());
-            return messageDto;
+            if(chat.get().getUsers().contains(Long.valueOf(UserContext.getUserId()))){
+                Message message = new Message();
+                message.setSender(Long.valueOf(UserContext.getUserId()));
+                message.setChat(chat.get());
+                message.setContent(messageDto.getContent());
+                messageRepository.save(message);
+                messageDto.setCreatedAt(message.getCreatedAt());
+                return messageDto;
+            }
+            else {
+                throw new Exception("User not in chat");
+            }
         }else {
             throw new Exception("Chat not found");
         }

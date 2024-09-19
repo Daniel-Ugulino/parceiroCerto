@@ -20,9 +20,6 @@ public class MessageDto {
     private String content;
 
     @NotNull
-    private Long sender;
-
-    @NotNull
     private Long chatId;
 
     private Date createdAt;
