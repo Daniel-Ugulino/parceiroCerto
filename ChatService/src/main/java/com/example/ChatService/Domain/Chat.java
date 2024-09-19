@@ -40,9 +40,4 @@ public class Chat {
         }
         this.users.add(userId);
     }
-
-    @PrePersist
-    protected void onCreate() {
-        UserContext.setUserId(this.users.get(0));
-    }
 }

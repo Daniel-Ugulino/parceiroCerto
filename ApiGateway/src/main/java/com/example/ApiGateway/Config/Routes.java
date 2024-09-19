@@ -54,7 +54,7 @@ public class Routes {
                 new Routes() {{
                     setPath("/task");
                     setEndpointRoles(Map.of(
-                            HttpMethod.POST, List.of("COMPANY", "FREELANCER"),
+                           HttpMethod.POST, List.of("COMPANY", "FREELANCER"),
                             HttpMethod.GET, List.of("HIRER", "COMPANY", "FREELANCER"),
                             HttpMethod.PUT, List.of("COMPANY", "FREELANCER"),
                             HttpMethod.PATCH, List.of("COMPANY", "FREELANCER")
@@ -93,6 +93,13 @@ public class Routes {
                     setPath("/feedback");
                     setEndpointRoles(Map.of(
                             HttpMethod.PUT, List.of("HIRER"),
+                            HttpMethod.GET, List.of("HIRER", "COMPANY", "FREELANCER")
+                    ));
+                }},
+                new Routes() {{
+                    setPath("/chat");
+                    setEndpointRoles(Map.of(
+                            HttpMethod.POST, List.of("HIRER", "COMPANY", "FREELANCER"),
                             HttpMethod.GET, List.of("HIRER", "COMPANY", "FREELANCER")
                     ));
                 }},
