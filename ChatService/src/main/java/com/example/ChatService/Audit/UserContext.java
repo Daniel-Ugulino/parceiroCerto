@@ -7,7 +7,7 @@ public class UserContext {
         context.set(userId);
     }
 
-    static String getUserId() {
+    public static String getUserId() {
         return context.get();
     }
 

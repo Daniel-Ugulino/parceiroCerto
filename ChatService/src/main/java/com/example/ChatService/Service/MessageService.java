@@ -1,5 +1,6 @@
 package com.example.ChatService.Service;
 
+import com.example.ChatService.Audit.UserContext;
 import com.example.ChatService.Domain.Chat;
 import com.example.ChatService.Domain.Message;
 import com.example.ChatService.Dto.MessageDto;
@@ -23,7 +24,7 @@ public class MessageService {
         Optional<Chat> chat = chatRepositoy.findById(messageDto.getChatId());
         if(chat.isPresent()) {
             Message message = new Message();
-            message.setSender(messageDto.getSender());
+            message.setSender(Long.valueOf(UserContext.getUserId()));
             message.setChat(chat.get());
             message.setContent(messageDto.getContent());
             messageRepository.save(message);
