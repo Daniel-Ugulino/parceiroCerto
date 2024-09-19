@@ -19,6 +19,7 @@ public class MessageService {
     private ChatRepositoy chatRepositoy;
 
     public MessageDto save(MessageDto messageDto) throws Exception {
+        System.out.println(messageDto.getChatId());
         Optional<Chat> chat = chatRepositoy.findById(messageDto.getChatId());
         if(chat.isPresent()) {
             Message message = new Message();
