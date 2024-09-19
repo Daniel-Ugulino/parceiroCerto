@@ -1,6 +1,5 @@
 package com.example.ChatService.Domain;
-
-import com.example.ChatService.Audit.UserContext;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,6 +27,7 @@ public class Message {
 
     @ManyToOne
     @JoinColumn(name = "chat_id")
+    @JsonIgnore
     private Chat chat;
 
     @PrePersist
