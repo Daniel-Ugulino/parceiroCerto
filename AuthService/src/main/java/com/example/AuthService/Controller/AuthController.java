@@ -28,12 +28,18 @@ public class AuthController {
 
     @DeleteMapping("/logout")
     ResponseEntity<Object> logout(HttpServletResponse response) {
-        Cookie cookie = new Cookie("access_token","");
-        cookie.setHttpOnly(true);
-        cookie.setSecure(true);
-        cookie.setMaxAge(0); // 10 minutes
-        cookie.setPath("/");
-        response.addCookie(cookie);
+        Cookie accessCookie = new Cookie("access_token","");
+        accessCookie.setHttpOnly(true);
+        accessCookie.setSecure(true);
+        accessCookie.setMaxAge(0);
+        accessCookie.setPath("/");
+
+        Cookie refreshCookie = new Cookie("refresh_token","");
+        refreshCookie.setHttpOnly(true);
+        refreshCookie.setSecure(true);
+        refreshCookie.setMaxAge(0);
+        refreshCookie.setPath("/");
+        response.addCookie(refreshCookie);
         return ResponseEntity.status(HttpStatus.OK).body(new CustomResponse<>("User Logged out"));
     }
 
