@@ -6,6 +6,6 @@ public class CustomRevisionListener implements RevisionListener {
     @Override
     public void newRevision(Object revisionEntity) {
         CustomRevisionEntity customRevisionEntity = (CustomRevisionEntity) revisionEntity;
-        customRevisionEntity.setModifiedBy(UserContext.getUserId());
+        customRevisionEntity.setModifiedBy(UserContext.getUserId().toString());
     }
 }
