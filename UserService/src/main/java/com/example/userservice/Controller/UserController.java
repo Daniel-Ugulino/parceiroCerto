@@ -14,7 +14,7 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<Object> getWorkers(@PathVariable Long id) {
+    public ResponseEntity<Object> getUser(@PathVariable Long id) {
         try {
             Users user = userService.getUser(id);
             return ResponseEntity.status(HttpStatus.OK).body(new CustomResponse<>("User Found",user));
